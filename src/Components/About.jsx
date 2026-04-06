@@ -5,7 +5,7 @@ export const About = () => {
   return (
     <div className="text-[#fdfdfd] flex flex-row justify-start mt-[10%] gap-5 max-md:flex-wrap">
       <div className="max-w-1/7 max-h-1/7">
-        <img src="../../public/img1.png" alt="" />
+        <img src="/img1.png" alt="" />
       </div>
       <div className="max-w-full">
         <div className="font-bold text-2xl  mb-4">
