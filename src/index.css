@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui";
+.badge {
+  /* bg-[#0d0d0d] text-[#fcfcfc] */
+  /* background-color: #0d0d0d; */
+  color: #fcfcfc;
+}
+.badge-neutral {
+  margin-bottom: 20px;
+}
