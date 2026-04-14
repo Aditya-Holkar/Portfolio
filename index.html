@@ -5,9 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>shangrila</title>
+    <!-- OLD CODE - Keep for reference -->
+    <!-- <script type="module" src="/src/main.jsx"></script> -->
+    
+    <!-- NEW CODE - Redirect to /Portfolio/ when accessed from root -->
+    <script>
+      (function() {
+        // Check if we are at root domain (not already inside /Portfolio/)
+        if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+          window.location.href = "/Portfolio/";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!-- OLD CODE - Keep for reference -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

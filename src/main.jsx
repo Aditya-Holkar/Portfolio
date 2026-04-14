@@ -10,6 +10,5 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter basename="/Portfolio">
       <App />
     </BrowserRouter>
-    ,
   </StrictMode>,
 );
