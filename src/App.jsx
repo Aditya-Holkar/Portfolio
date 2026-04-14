@@ -3,9 +3,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import { Navbar } from "./Component/Navbar";
 import { Home } from "./Component/Home";
-const handleMenuClick = () => {
-  setBut(false); // Close menu when anything inside menu is clicked
-};
+
 function App() {
   return (
     <div className="relative bg-[#0d0d0d] text-[#fcfcfc]">
