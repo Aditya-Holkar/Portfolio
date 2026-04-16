@@ -66,7 +66,7 @@ export const Third = () => {
         {techStack.map(function (params, idx) {
           return (
             <div className="flex flex-row gap-4" key={idx}>
-              <div className="badge badge-neutral badge-ghost h-15 w-15">
+              <div className="badge badge-neutral badge-ghost h-15 w-15 bg-[#0d0d0d] border-solid border-[#fcfcfc]">
                 {params.icon}
               </div>
               <div className=" content-center">
