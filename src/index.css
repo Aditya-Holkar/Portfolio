@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui";
-/* .badge {
+@import "lenis/dist/lenis.css";
+.badge {
   color: #fcfcfc;
-} */
+}
 .badge-neutral {
   margin-bottom: 20px;
 }

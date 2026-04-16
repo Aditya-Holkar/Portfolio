@@ -10,6 +10,7 @@ export const First = () => {
           alt=""
         />
       </div>
+
       <div className="flex flex-col gap-4 flex-5">
         <div>
           Frontend Developer experienced in building a 50+ component design
