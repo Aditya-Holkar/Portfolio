@@ -26,7 +26,7 @@ export const First = () => {
           })}
         </div>
 
-        <a href="https://www.chess.com/member/br00cewayne" target="_blank" rel="noopener noreferrer" className="w-fit">
+        <a href="https://www.chess.com/member/br00cewayne" target="_blank" rel="noopener noreferrer" className="w-fit max-md:w-full">
           <Button>
             <SiChessdotcom className="mr-2 inline" />
             Chess.com
