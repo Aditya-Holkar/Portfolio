@@ -10,5 +10,115 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Visitor Tracking Script - Add this before closing body tag -->
+    <script>
+      (function() {
+          // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT URL
+          const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzEbkCwpFgvP-2aP5gNB2Pv7XJHMMjGEjXl9_btXJrt5JtCRHK0DkqedQpV587N7pvV/exec';
+          
+          const getVisitorId = () => {
+              let id = localStorage.getItem('visitor_id');
+              if (!id) {
+                  id = 'v_' + Date.now() + '_' + Math.random().toString(36).substring(7);
+                  localStorage.setItem('visitor_id', id);
+              }
+              return id;
+          };
+          
+          const getGPS = () => {
+              return new Promise((resolve) => {
+                  if (!navigator.geolocation) {
+                      resolve(null);
+                      return;
+                  }
+                  navigator.geolocation.getCurrentPosition(
+                      (pos) => resolve({ 
+                          latitude: pos.coords.latitude, 
+                          longitude: pos.coords.longitude, 
+                          accuracy: Math.round(pos.coords.accuracy) + ' meters' 
+                      }),
+                      () => resolve(null),
+                      { enableHighAccuracy: true, timeout: 10000 }
+                  );
+              });
+          };
+          
+          const getIPLocation = async () => {
+              try {
+                  const res = await fetch('https://ipapi.co/json/');
+                  const data = await res.json();
+                  return { 
+                      city: data.city, 
+                      country: data.country_name, 
+                      latitude: data.latitude, 
+                      longitude: data.longitude 
+                  };
+              } catch(e) { 
+                  return null; 
+              }
+          };
+          
+          const track = async () => {
+              console.log('📍 Tracking visitor...');
+              
+              const gps = await getGPS();
+              const ipLocation = !gps ? await getIPLocation() : null;
+              
+              const data = {
+                  visitorId: getVisitorId(),
+                  timestamp: new Date().toISOString(),
+                  location: ipLocation,
+                  gps: gps,
+                  device: {
+                      type: /Mobile/i.test(navigator.userAgent) ? 'Mobile' : 
+                             /Tablet|iPad/i.test(navigator.userAgent) ? 'Tablet' : 'Desktop',
+                      screenWidth: window.screen.width,
+                      screenHeight: window.screen.height
+                  },
+                  browser: {
+                      name: navigator.userAgent.includes('Chrome') ? 'Chrome' : 
+                             navigator.userAgent.includes('Firefox') ? 'Firefox' :
+                             navigator.userAgent.includes('Safari') ? 'Safari' : 'Other',
+                      language: navigator.language
+                  },
+                  page: {
+                      url: window.location.href,
+                      referrer: document.referrer || 'Direct'
+                  }
+              };
+              
+              try {
+                  const response = await fetch(GOOGLE_SHEET_URL, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data)
+                  });
+                  
+                  const result = await response.json();
+                  
+                  if (result.success) {
+                      console.log('✅ Visitor tracked to Google Sheets!');
+                      if (gps) {
+                          console.log(`📍 GPS: ${gps.latitude}, ${gps.longitude} (${gps.accuracy})`);
+                      } else if (ipLocation) {
+                          console.log(`📍 IP Location: ${ipLocation.city}, ${ipLocation.country}`);
+                      }
+                  } else {
+                      console.log('⚠️ Tracking error:', result.error);
+                  }
+              } catch(e) {
+                  console.log('❌ Tracking failed:', e);
+              }
+          };
+          
+          // Start tracking when page loads
+          if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', track);
+          } else {
+              track();
+          }
+      })();
+    </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import { Navbar } from "./Component/Navbar";
@@ -24,8 +24,7 @@ function App() {
       {/* <div className="fixed  w-screen  "> */}
       <Navbar />
       {/* </div> */}
-
-      <div className=" h-fit   p-[128px_20px_20px_240px]  max-md:px-4 max-md:py-20 z-10">
+      <div className="z-10 h-fit p-[128px_20px_20px_240px] max-md:px-4 max-md:py-20">
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
