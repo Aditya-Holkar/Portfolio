@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "./Button";
 
 export const Fifth = () => {
@@ -17,7 +16,8 @@ export const Fifth = () => {
         {
           img: "https://capslock.studio/logo.svg",
           title: "High-Impact Component Architecture",
-          description: "Built 50+ reusable React components with Tailwind CSS, refactored legacy code into modular architecture, and ensured full responsiveness.",
+          description:
+            "Built 50+ reusable React components with Tailwind CSS, refactored legacy code into modular architecture, and ensured full responsiveness.",
           lnk: "",
         },
       ],
@@ -36,7 +36,8 @@ export const Fifth = () => {
         {
           img: "https://capslock.studio/products/data-studio.svg",
           title: "Data Integration & API Architecture",
-          description: "Integrated REST APIs and handled data fetching, state management, and error handling across applications. Implemented Supabase and Neon DB integrations for real-time data and serverless PostgreSQL workflows.",
+          description:
+            "Integrated REST APIs and handled data fetching, state management, and error handling across applications. Implemented Supabase and Neon DB integrations for real-time data and serverless PostgreSQL workflows.",
           lnk: "https://email-validation-kappa.vercel.app/",
         },
       ],
@@ -55,8 +56,29 @@ export const Fifth = () => {
         {
           img: "https://capslock.studio/logo.svg",
           title: "Production Website Maintenance",
-          description: "Maintained UI and frontend functionality for 5+ production websites.",
+          description:
+            "Maintained UI and frontend functionality for 5+ production websites.",
           lnk: "",
+        },
+      ],
+    },
+    {
+      lst: [
+        { label: "Name", value: "TradeIntel" },
+        { label: "Role", value: "Frontend Developer" },
+        {
+          label: "Scope",
+          value: "UI Development, Theme System, Responsive Design, Dark/Light Mode",
+        },
+        { label: "Date", value: "2025" },
+      ],
+      proj: [
+        {
+          img: "/tradeintel-og.svg",
+          title: "Import/Export Intelligence Platform",
+          description:
+            "Built a modern React + Vite SPA for global trade intelligence — featuring dark/light theme system, responsive layout, and component-driven architecture with Tailwind CSS v4.",
+          lnk: "https://tradeintels.netlify.app/",
         },
       ],
     },
@@ -64,54 +86,41 @@ export const Fifth = () => {
 
   return (
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
-      <h1 className="badge badge-neutral badge-outline flex-1">Key Project</h1>
+      <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Key Project</div>
       <div className="flex flex-5 flex-col gap-15">
-        {dj.map(function (params, idx) {
-          return (
-            <div key={idx} className="flex flex-row border-t-2 p-[28px_8px_0px_8px] max-md:flex-col">
-              <div className="flex w-1/3 flex-col gap-5">
-                {params.lst.map(function (item, itemIdx) {
-                  return (
-                    <div key={itemIdx}>
-                      <div className="text-[#8a8a93]">{item.label}</div>
-                      <div>{item.value}</div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex w-full flex-col gap-5">
-                {params.proj.map(function (project, projectIdx) {
-                  return (
-                    <div key={projectIdx} className="flex flex-col gap-4">
-                      <img src={project.img} alt="" className="object-fit h-[250px] w-full" />
-                      <div className="flex flex-row gap-4 text-2xl max-md:flex-col">
-                        <div>{project.title}</div>
-                        {/* <Button>
-                          <a href={project.lnk || "#"} target={project.lnk ? "_blank" : "_self"} className="font-bold" onClick={(e) => !project.lnk && e.preventDefault()}>
-                            View
-                          </a>
-                        </Button> */}
-                        {project.lnk ? (
-                          <a href={project.lnk} target="_blank" rel="noopener noreferrer">
-                            <Button>
-                              <span className="font-bold">View</span>
-                            </Button>
-                          </a>
-                        ) : (
-                          <Button>
-                            <span className="cursor-not-allowed font-bold opacity-50">View (Unavailable)</span>
-                          </Button>
-                        )}
-                      </div>
-                      <div className="text-[#8a8a93]">{project.description}</div>
-                    </div>
-                  );
-                })}
-              </div>
+        {dj.map((params, idx) => (
+          <div key={idx} className="flex flex-row border-t-2 p-[28px_8px_0px_8px] max-md:flex-col" style={{ borderColor: "var(--border-subtle)" }}>
+            <div className="flex w-1/3 flex-col gap-5">
+              {params.lst.map((item, itemIdx) => (
+                <div key={itemIdx}>
+                  <div className="text-xs font-medium uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>{item.label}</div>
+                  <div className="mt-0.5 text-sm font-bold">{item.value}</div>
+                </div>
+              ))}
             </div>
-          );
-        })}
+
+            <div className="flex w-full flex-col gap-5">
+              {params.proj.map((project, projectIdx) => (
+                <div key={projectIdx} className="flex flex-col gap-4">
+                  <div className="w-full h-[220px] rounded-lg bg-[#0d0d0d] flex items-center justify-center p-4">
+                    <img src={project.img} alt="" className="h-full w-full object-contain" />
+                  </div>
+                  <div className="flex flex-row gap-4 text-2xl max-md:flex-col">
+                    <div className="font-bold">{project.title}</div>
+                    {project.lnk ? (
+                      <a href={project.lnk} target="_blank" rel="noopener noreferrer">
+                        <Button><span className="font-bold">View</span></Button>
+                      </a>
+                    ) : (
+                      <Button><span className="cursor-not-allowed font-bold opacity-50">View (Unavailable)</span></Button>
+                    )}
+                  </div>
+                  <div className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{project.description}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

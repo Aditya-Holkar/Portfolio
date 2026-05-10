@@ -3,7 +3,7 @@ import React from "react";
 export const Fourth = () => {
   return (
     <div className="flex flex-row max-md:flex-col gap-4 max-md:gap-0">
-      <h1 className="badge badge-neutral badge-outline flex-1">Experience</h1>
+      <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Experience</div>
       <div className="flex flex-row max-md:flex-col gap-4 justify-start flex-5">
         <div className="text-lg flex-1 ">
           Capslock Studio Private Limited, <i>Pune</i>
@@ -12,7 +12,7 @@ export const Fourth = () => {
           <div>
             <span className="font-bold">Frontend Developer</span>{" "}
             <i>
-              Built a smooth, user-friendly UI with React + Tailwind (DaisyUI) —
+              Built a smooth, user-friendly UI with React + Tailwind —
               fast, clean, and interactive.
             </i>
           </div>

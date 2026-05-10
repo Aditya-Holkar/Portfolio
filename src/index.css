@@ -1,9 +1,49 @@
 @import "tailwindcss";
-@plugin "daisyui";
 @import "lenis/dist/lenis.css";
-.badge {
-  color: #fcfcfc;
+
+:root,
+[data-theme="dark"] {
+  --bg: #0d0d0d;
+  --bg-secondary: #1a1a1a;
+  --text: #fcfcfc;
+  --text-muted: #8a8a93;
+  --border: #fcfcfc;
+  --border-subtle: rgba(252, 252, 252, 0.1);
+  --accent: #7c4dff;
+  --accent-secondary: #5c6bc0;
 }
-.badge-neutral {
+
+[data-theme="light"] {
+  --bg: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #666;
+  --border: #1a1a1a;
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --accent: #5c6bc0;
+  --accent-secondary: #7c4dff;
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scroll Progress Bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent));
+  z-index: 9999;
+}
+
+/* Section label style (replaces DaisyUI badges) */
+.section-label {
   margin-bottom: 20px;
+  color: var(--text-muted);
 }
