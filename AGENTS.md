@@ -179,3 +179,9 @@ main.jsx
 - **Fifth.jsx**: Removed border, rounded-2xl, and background from project cards; removed all GSAP horizontal scroll effect, restored original vertical list layout with proper 2-column lst/proj structure
 - **Home.jsx**: Changed all sections to `min-h-screen` with `flex items-center` for full-viewport section covering, then reverted to natural height with `gap-10` spacing
 - Updated AGENTS.md change log
+
+### 2026-05-11 — Added monochrome background image to all surfaces
+- **public/**: Added `100-90-5-monochrome.png` dot pattern image
+- **index.css**: Set as `background-image` on `body` with `background-attachment: fixed` and `background-blend-mode: multiply`
+- **App.jsx**: Applied same background to root wrapper div with fixed attachment
+- **Navbar.jsx**: Applied background to desktop sidebar, mobile top bar, and mobile menu overlay — all with fixed attachment so image stays in place while content scrolls
