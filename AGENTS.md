@@ -185,3 +185,21 @@ main.jsx
 - **index.css**: Set as `background-image` on `body` with `background-attachment: fixed` and `background-blend-mode: multiply`
 - **App.jsx**: Applied same background to root wrapper div with fixed attachment
 - **Navbar.jsx**: Applied background to desktop sidebar, mobile top bar, and mobile menu overlay — all with fixed attachment so image stays in place while content scrolls
+
+### 2026-05-11 — Added UniSearch project to Fifth.jsx
+- Added new project entry "UniSearch" to Fifth.jsx (University Discovery Platform)
+- Role: Frontend Developer — built React + Vite SPA with Hipolabs Universities API (15,000+ institutions), country-based search, table/card views, favorites with localStorage, dark/light theme, CSV export, visitor analytics, Tailwind CSS v4 + DaisyUI
+- Created `public/unisearch-og.svg` — indigo gradient OG image with amber accent, globe wireframe motif, graduation cap icon
+- Link: https://uni-search-tau.vercel.app/
+- Updated AGENTS.md change log
+
+### 2026-05-11 — React performance optimization: memo, hoist, clock isolation
+- **App.jsx**: Removed `useThemeStore(s => s.theme)` subscription — CSS vars update automatically from `data-theme` attr; stops full tree re-render on theme toggle
+- **Store.js**: Sets `data-theme` on document at module init so App doesn't need to subscribe
+- **Button.jsx**: Wrapped in `React.memo` (used 7-12x per page)
+- **First.jsx / Second.jsx / Third.jsx / Fourth.jsx / Fifth.jsx / Sixth.jsx / Home.jsx**: Wrapped all section components in `React.memo` to stop cascade re-renders
+- **Third.jsx / Fifth.jsx / First.jsx**: Hoisted static arrays (`techStack`, `dj`, `items`) outside component scope — avoid re-allocation on every render
+- **Navbar.jsx**: Extracted clock into isolated `Clock` component (`memo`) — 1-second tick only re-renders clock, not entire sidebar
+- **Home.jsx**: Replaced inline callback refs with stable `useRef` objects — prevents unnecessary ref detach/reattach on render
+- **src/Component/Profiler.jsx**: Added dev-only `<Profile>` wrapper using React Profiler API for render timing
+- Updated AGENTS.md change log
