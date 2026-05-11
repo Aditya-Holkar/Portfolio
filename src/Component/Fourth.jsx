@@ -1,6 +1,6 @@
-import React from "react";
+import { memo } from "react";
 
-export const Fourth = () => {
+export const Fourth = memo(() => {
   return (
     <div className="flex flex-row max-md:flex-col gap-4 max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Experience</div>
@@ -21,4 +21,4 @@ export const Fourth = () => {
       </div>
     </div>
   );
-};
+});

@@ -1,8 +1,10 @@
-import React from "react";
+import { memo } from "react";
 import { Button } from "./Button";
 import { SiChessdotcom } from "react-icons/si";
 
-export const First = () => {
+const items = ["React Developer", "adiholkar555@gmail.com"];
+
+export const First = memo(() => {
   return (
     <div className="flex flex-row justify-start gap-4 max-md:flex-col max-md:gap-0">
       <div className="h-50 w-50 flex-1 px-2.5">
@@ -14,7 +16,7 @@ export const First = () => {
           <span className="font-bold">Frontend Developer </span>experienced in building a 50+ component design system from scratch (Carbon-inspired) using React and Tailwind. Skilled in maintaining multiple production websites, API integration, and component-driven architecture.
         </div>
         <div className="flex flex-row flex-wrap gap-4">
-          {["React Developer", "adiholkar555@gmail.com"].map(function (params, idx) {
+          {items.map(function (params, idx) {
             if (params.includes("@")) {
               return (
                 <a href={`mailto:${params}`} key={idx} className="max-md:w-full">
@@ -35,4 +37,4 @@ export const First = () => {
       </div>
     </div>
   );
-};
+});

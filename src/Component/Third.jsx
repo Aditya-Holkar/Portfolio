@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { FaReact } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { PiFileSql } from "react-icons/pi";
@@ -6,8 +7,7 @@ import { SiGsap } from "react-icons/si";
 import { SiSupabase } from "react-icons/si";
 import { TbPrompt } from "react-icons/tb";
 
-export const Third = () => {
-  const techStack = [
+const techStack = [
     {
       icon: <FaReact size={30} />,
       name: "React",
@@ -43,8 +43,9 @@ export const Third = () => {
       name: "Prompt Engineering",
       description: "Optimizing AI interactions through carefully crafted prompts for precise and reliable outputs",
     },
-  ];
+];
 
+export const Third = memo(() => {
   return (
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Skills</div>
@@ -66,4 +67,4 @@ export const Third = () => {
       </div>
     </div>
   );
-};
+});

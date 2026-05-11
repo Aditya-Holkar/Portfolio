@@ -1,15 +1,46 @@
-import { useState, useEffect, useRef } from "react";
+import { memo, useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import gsap from "gsap";
 import { useThemeStore } from "../Zu-Store/Store";
 import { FiSun, FiMoon } from "react-icons/fi";
 
+const Clock = memo(() => {
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    const update = () => {
+      setCurrentTime(
+        new Date().toLocaleTimeString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        }),
+      );
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div
+      className="w-fit rounded-full border px-3 py-1.5 font-mono text-xs tracking-wider"
+      style={{
+        borderColor: "var(--border-subtle)",
+        color: "var(--text-muted)",
+      }}
+    >
+      Pune: {currentTime}
+    </div>
+  );
+});
+
 export const Navbar = () => {
   const [but, setBut] = useState(false);
-  const [currentTime, setCurrentTime] = useState("");
   const { theme, toggleTheme } = useThemeStore();
   const linksRef = useRef([]);
-  const clockRef = useRef(null);
   const sidebarRef = useRef(null);
   const brandRef = useRef(null);
 
@@ -20,24 +51,6 @@ export const Navbar = () => {
       document.body.style.overflow = "";
     }
   }, [but]);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString("en-IN", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        }),
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -54,7 +67,6 @@ export const Navbar = () => {
           delay: 0.4,
         },
       );
-      gsap.fromTo(clockRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.8 });
     }, sidebarRef);
     return () => ctx.revert();
   }, []);
@@ -96,16 +108,7 @@ export const Navbar = () => {
             {theme === "dark" ? <FiSun size={16} /> : <FiMoon size={16} />}
             <span>{theme === "dark" ? "Light" : "Dark"} Mode</span>
           </button>
-          <div
-            ref={clockRef}
-            className="w-fit rounded-full border px-3 py-1.5 font-mono text-xs tracking-wider"
-            style={{
-              borderColor: "var(--border-subtle)",
-              color: "var(--text-muted)",
-            }}
-          >
-            Pune: {currentTime}
-          </div>
+          <Clock />
         </div>
       </div>
 
@@ -122,15 +125,7 @@ export const Navbar = () => {
         }}
       >
         <span className="font-bold tracking-tight">Aditya Holkar</span>
-        <div
-          className="hidden rounded-full border px-2.5 py-1 font-mono text-[11px] tracking-wider max-md:block"
-          style={{
-            borderColor: "var(--border-subtle)",
-            color: "var(--text-muted)",
-          }}
-        >
-          Pune: {currentTime}
-        </div>
+        <div className="max-md:block hidden"><Clock /></div>
         <div className="flex items-center gap-2">
           <button onClick={toggleTheme} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg transition-colors hover:opacity-70">
             {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
@@ -164,15 +159,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <div className="mt-auto">
-            <div
-              className="w-fit rounded-full border px-3 py-1.5 font-mono text-xs"
-              style={{
-                borderColor: "var(--border-subtle)",
-                color: "var(--text-muted)",
-              }}
-            >
-              Pune: {currentTime}
-            </div>
+            <Clock />
           </div>
         </div>
       )}

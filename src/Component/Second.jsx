@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
@@ -12,7 +12,7 @@ const dt = [
   { icon: <SiLeetcode />, lnk: "https://leetcode.com/u/aditya-holkar/" },
 ];
 
-export const Second = () => {
+export const Second = memo(() => {
   return (
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Socials</div>
@@ -27,4 +27,4 @@ export const Second = () => {
       </div>
     </div>
   );
-};
+});

@@ -3,19 +3,13 @@ import { Route, Routes } from 'react-router'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useThemeStore } from './Zu-Store/Store'
 import { Navbar } from './Component/Navbar'
 import { Home } from './Component/Home'
 
 gsap.registerPlugin(ScrollTrigger)
 
 function App () {
-  const theme = useThemeStore(s => s.theme)
   const progressRef = useRef(null)
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
 
   useEffect(() => {
     const lenis = new Lenis()

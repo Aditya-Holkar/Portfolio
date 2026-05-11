@@ -1,7 +1,7 @@
+import { memo } from "react";
 import { Button } from "./Button";
 
-export const Fifth = () => {
-  const dj = [
+const dj = [
     {
       lst: [
         { label: "Name", value: "Capslock Design System" },
@@ -82,8 +82,9 @@ export const Fifth = () => {
         },
       ],
     },
-  ];
+];
 
+export const Fifth = memo(() => {
   return (
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Key Project</div>
@@ -124,4 +125,4 @@ export const Fifth = () => {
       </div>
     </div>
   );
-};
+});

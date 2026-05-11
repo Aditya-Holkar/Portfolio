@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { First } from "./First";
@@ -10,15 +10,20 @@ import { Sixth } from "./Sixth";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const Home = () => {
-  const sectionsRef = useRef([]);
+export const Home = memo(() => {
+  const s0 = useRef(null);
+  const s1 = useRef(null);
+  const s2 = useRef(null);
+  const s3 = useRef(null);
+  const s4 = useRef(null);
+  const s5 = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      sectionsRef.current.forEach((section) => {
-        if (!section) return;
+      [s0, s1, s2, s3, s4, s5].forEach((ref) => {
+        if (!ref.current) return;
         gsap.fromTo(
-          section,
+          ref.current,
           { opacity: 0, y: 60 },
           {
             opacity: 1,
@@ -26,7 +31,7 @@ export const Home = () => {
             duration: 0.8,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: section,
+              trigger: ref.current,
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
@@ -40,24 +45,24 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <div ref={(el) => (sectionsRef.current[0] = el)}>
+      <div ref={s0}>
         <First />
       </div>
-      <div ref={(el) => (sectionsRef.current[1] = el)}>
+      <div ref={s1}>
         <Second />
       </div>
-      <div ref={(el) => (sectionsRef.current[2] = el)}>
+      <div ref={s2}>
         <Sixth />
       </div>
-      <div ref={(el) => (sectionsRef.current[3] = el)}>
+      <div ref={s3}>
         <Third />
       </div>
-      <div ref={(el) => (sectionsRef.current[4] = el)}>
+      <div ref={s4}>
         <Fourth />
       </div>
-      <div ref={(el) => (sectionsRef.current[5] = el)}>
+      <div ref={s5}>
         <Fifth />
       </div>
     </div>
   );
-};
+});
