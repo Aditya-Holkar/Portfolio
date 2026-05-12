@@ -79,7 +79,7 @@ const dj = [
         title: 'Import/Export Intelligence Platform',
         description:
           'Built a modern React + Vite SPA for global trade intelligence — featuring dark/light theme system, responsive layout, and component-driven architecture with Tailwind CSS v4.',
-        lnk: 'https://tradeintels.netlify.app/'
+        lnk: 'https://trade-intell.vercel.app/'
       }
     ]
   },
