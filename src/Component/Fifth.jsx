@@ -103,6 +103,27 @@ const dj = [
         lnk: 'https://uni-search-tau.vercel.app/'
       }
     ]
+  },
+  {
+    lst: [
+      { label: 'Name', value: 'Taste Atlas' },
+      { label: 'Role', value: 'Frontend Developer' },
+      {
+        label: 'Scope',
+        value:
+          'Interactive Map, API Integration, Theme System, Favorites & Bucket List, Geolocation'
+      },
+      { label: 'Date', value: '2026' }
+    ],
+    proj: [
+      {
+        img: '/tasteatlas-og.svg',
+        title: 'Global Cuisine Discovery Platform',
+        description:
+          'Built a React + Vite SPA for exploring cuisines worldwide — featuring interactive Leaflet world map with custom markers, MealDB API integration (78+ countries, 200+ recipes), dark/light theme system, favorites & bucket list with localStorage persistence, geolocation-based nearby cuisine discovery, heat map visualization, and responsive design with Tailwind CSS v4.',
+        lnk: 'https://taste-atlas.onrender.com/'
+      }
+    ]
   }
 ]
 
