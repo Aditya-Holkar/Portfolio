@@ -4,7 +4,7 @@ export const Sixth = memo(() => {
   return (
     <div className="flex flex-row max-md:flex-col gap-4 max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Education</div>
-      <div className=" flex-5 flex flex-row max-md:flex-col gap-4 justify-start ">
+      <div className=" flex-[5] flex flex-row max-md:flex-col gap-4 justify-start ">
         <div className="text-lg flex-1 ">
           Annasaheb Magar College - Pune <i>(Pune University)</i>
         </div>

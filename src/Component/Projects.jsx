@@ -2,13 +2,11 @@ import { memo } from 'react'
 import { Button } from './Button'
 import { projectsData } from '../Data/ProjectsData'
 
-export const Fifth = memo(() => {
+export const Projects = memo(() => {
   return (
-    <div className='flex flex-row gap-4 max-md:flex-col max-md:gap-0'>
-      <div className='section-label flex-1 text-xs font-medium uppercase tracking-widest'>
-        Key Project
-      </div>
-      <div className='flex flex-[5] flex-col gap-15'>
+    <div className='flex flex-col gap-12'>
+      <h1 className='text-4xl font-bold tracking-tight'>Projects</h1>
+      <div className='flex flex-col gap-15'>
         {projectsData.map((params, idx) => (
           <div
             key={idx}

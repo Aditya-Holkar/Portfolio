@@ -5,7 +5,6 @@ import { First } from "./First";
 import { Second } from "./Second";
 import { Third } from "./Third";
 import { Fourth } from "./Fourth";
-import { Fifth } from "./Fifth";
 import { Sixth } from "./Sixth";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,11 +15,9 @@ export const Home = memo(() => {
   const s2 = useRef(null);
   const s3 = useRef(null);
   const s4 = useRef(null);
-  const s5 = useRef(null);
-
   useEffect(() => {
     const ctx = gsap.context(() => {
-      [s0, s1, s2, s3, s4, s5].forEach((ref) => {
+      [s0, s1, s2, s3, s4].forEach((ref) => {
         if (!ref.current) return;
         gsap.fromTo(
           ref.current,
@@ -32,7 +29,7 @@ export const Home = memo(() => {
             ease: "power3.out",
             scrollTrigger: {
               trigger: ref.current,
-              start: "top 85%",
+              start: "top bottom",
               toggleActions: "play none none reverse",
             },
           }
@@ -59,9 +56,6 @@ export const Home = memo(() => {
       </div>
       <div ref={s4}>
         <Fourth />
-      </div>
-      <div ref={s5}>
-        <Fifth />
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ export const Third = memo(() => {
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Skills</div>
 
-      <div className="flex flex-5 flex-col gap-6">
+      <div className="flex flex-[5] flex-col gap-6">
         {techStack.map(function (params, idx) {
           return (
             <div className="flex flex-row gap-4" key={idx}>

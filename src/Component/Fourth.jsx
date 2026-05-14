@@ -4,7 +4,7 @@ export const Fourth = memo(() => {
   return (
     <div className="flex flex-row max-md:flex-col gap-4 max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Experience</div>
-      <div className="flex flex-row max-md:flex-col gap-4 justify-start flex-5">
+      <div className="flex flex-row max-md:flex-col gap-4 justify-start flex-[5]">
         <div className="text-lg flex-1 ">
           Capslock Studio Private Limited, <i>Pune</i>
         </div>

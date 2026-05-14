@@ -8,7 +8,10 @@ if (typeof window !== "undefined") {
 export const useThemeStore = create((set) => ({
   theme: typeof window !== "undefined" ? localStorage.getItem("shangrila-theme") || "dark" : "dark",
   ready: false,
+  routeLoading: false,
+  routeLabel: '',
   setReady: () => set({ ready: true }),
+  setRouteLoading: (loading, label) => set({ routeLoading: loading, routeLabel: label || '' }),
   toggleTheme: () =>
     set((state) => {
       const next = state.theme === "dark" ? "light" : "dark";

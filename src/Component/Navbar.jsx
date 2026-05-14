@@ -39,7 +39,7 @@ const Clock = memo(() => {
 
 export const Navbar = () => {
   const [but, setBut] = useState(false);
-  const { theme, toggleTheme } = useThemeStore();
+  const { theme, toggleTheme, setRouteLoading } = useThemeStore();
   const linksRef = useRef([]);
   const sidebarRef = useRef(null);
   const brandRef = useRef(null);
@@ -71,7 +71,7 @@ export const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
-  const navLinks = [{ to: "/", label: "Home" }];
+  const navLinks = [{ to: "/", label: "Home" }, { to: "/projects", label: "Projects" }];
 
   return (
     <>
@@ -94,12 +94,12 @@ export const Navbar = () => {
             Aditya Holkar
           </h1>
           <nav className="flex flex-col gap-5">
-            {navLinks.map((link, i) => (
-              <Link key={link.to} to={link.to} ref={(el) => (linksRef.current[i] = el)} className="group relative text-sm font-medium tracking-widest uppercase transition-colors" style={{ color: "var(--text-muted)" }}>
-                <span className="absolute top-1/2 -left-5 h-px w-4 -translate-y-1/2 bg-[var(--text)] opacity-0 transition-all duration-300 group-hover:w-8 group-hover:opacity-100" />
-                {link.label}
-              </Link>
-            ))}
+              {navLinks.map((link, i) => (
+                <Link key={link.to} to={link.to} onClick={() => setRouteLoading(true, link.label)} ref={(el) => (linksRef.current[i] = el)} className="group relative text-sm font-medium tracking-widest uppercase transition-colors" style={{ color: "var(--text-muted)" }}>
+                  <span className="absolute top-1/2 -left-5 h-px w-4 -translate-y-1/2 bg-[var(--text)] opacity-0 transition-all duration-300 group-hover:w-8 group-hover:opacity-100" />
+                  {link.label}
+                </Link>
+              ))}
           </nav>
         </div>
 
@@ -154,7 +154,7 @@ export const Navbar = () => {
           }}
         >
           {navLinks.map((link) => (
-            <Link key={link.to} to={link.to} onClick={() => setBut(false)} className="border-b py-5 text-lg font-bold tracking-wide" style={{ borderColor: "var(--border-subtle)" }}>
+            <Link key={link.to} to={link.to} onClick={() => { setBut(false); setRouteLoading(true, link.label); }} className="border-b py-5 text-lg font-bold tracking-wide" style={{ borderColor: "var(--border-subtle)" }}>
               {link.label}
             </Link>
           ))}

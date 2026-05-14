@@ -16,7 +16,7 @@ export const Second = memo(() => {
   return (
     <div className="flex flex-row gap-4 max-md:flex-col max-md:gap-0">
       <div className="section-label flex-1 text-xs font-medium uppercase tracking-widest">Socials</div>
-      <div className="flex flex-5 flex-row gap-5">
+      <div className="flex flex-[5] flex-row gap-5">
         {dt.map(function (params, idx) {
           return (
             <a href={params.lnk} target="/" className="" key={idx}>

@@ -11,7 +11,7 @@ export const First = memo(() => {
         <img src="https://i.pinimg.com/736x/41/68/60/416860c571f040a91efe5df421cc9cd3.jpg" alt="" />
       </div>
 
-      <div className="flex flex-5 flex-col gap-4">
+      <div className="flex flex-[5] flex-col gap-4">
         <div>
           <span className="font-bold">Frontend Developer </span>experienced in building a 50+ component design system from scratch (Carbon-inspired) using React and Tailwind. Skilled in maintaining multiple production websites, API integration, and component-driven architecture.
         </div>
