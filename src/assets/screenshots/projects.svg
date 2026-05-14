@@ -1,162 +1,138 @@
 <svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <pattern id="proj-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="#1a1a1a" opacity="0.6"/>
-    </pattern>
-    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.5"/>
-    </filter>
-    <filter id="img-gradient">
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.3"/>
-      </feComponentTransfer>
-    </filter>
-    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a1a1a"/>
-      <stop offset="100%" stop-color="#141414"/>
-    </linearGradient>
-  </defs>
-
   <!-- Background -->
   <rect width="1200" height="900" fill="#0d0d0d"/>
-  <rect width="1200" height="900" fill="url(#proj-dots)"/>
 
   <!-- Sidebar -->
-  <rect x="0" y="0" width="224" height="900" fill="#0d0d0d" opacity="0.88"/>
-  <rect x="224" y="0" width="1" height="900" fill="rgba(252,252,252,0.06)"/>
+  <rect x="0" y="0" width="224" height="900" fill="#0b0b0b"/>
+  <rect x="224" y="0" width="1" height="900" fill="#1a1a1a"/>
 
   <!-- Sidebar: Brand -->
   <rect x="32" y="32" width="34" height="34" rx="8" fill="#7c4dff" opacity="0.15"/>
-  <text x="49" y="55" text-anchor="middle" font-family="'Times New Roman',Georgia,serif" font-size="18" font-weight="700" fill="#7c4dff">AH</text>
-  <text x="78" y="53" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#fcfcfc">Aditya Holkar</text>
+  <text x="49" y="55" text-anchor="middle" font-family="Georgia,serif" font-size="18" font-weight="700" fill="#7c4dff">AH</text>
+  <text x="78" y="53" font-family="system-ui,sans-serif" font-size="16" font-weight="600" fill="#fcfcfc">Aditya Holkar</text>
 
   <!-- Sidebar: Nav -->
-  <text x="32" y="113" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a8a93" letter-spacing="1.5">HOME</text>
-
-  <rect x="0" y="130" width="224" height="36" fill="rgba(124,77,255,0.08)"/>
-  <rect x="0" y="130" width="3" height="36" fill="#7c4dff" rx="0 2 2 0"/>
-  <text x="32" y="153" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#fcfcfc" letter-spacing="1.5">PROJECTS</text>
+  <text x="32" y="113" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#8a8a93" letter-spacing="1.5">HOME</text>
+  <rect x="0" y="130" width="224" height="36" fill="#7c4dff" opacity="0.08"/>
+  <rect x="0" y="130" width="3" height="36" fill="#7c4dff"/>
+  <text x="32" y="153" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#fcfcfc" letter-spacing="1.5">PROJECTS</text>
 
   <!-- Sidebar: Theme toggle -->
-  <rect x="32" y="190" width="70" height="30" rx="15" fill="rgba(252,252,252,0.06)"/>
+  <rect x="32" y="190" width="70" height="30" rx="15" fill="#1a1a1a"/>
   <rect x="34" y="192" width="26" height="26" rx="13" fill="#7c4dff"/>
-  <text x="44" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fcfcfc">&#9790;</text>
-  <text x="70" y="209" font-family="system-ui, sans-serif" font-size="10" fill="#8a8a93">&#9725;</text>
+  <text x="44" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fcfcfc">&#9790;</text>
+  <text x="70" y="209" font-family="system-ui,sans-serif" font-size="10" fill="#8a8a93">&#9725;</text>
 
   <!-- Sidebar: Clock -->
-  <text x="32" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#8a8a93" letter-spacing="1">CLOCK</text>
+  <text x="32" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#5a5a5a" letter-spacing="1">CLOCK</text>
   <text x="32" y="286" font-family="'Courier New',monospace" font-size="24" font-weight="600" fill="#fcfcfc">10:42</text>
-  <text x="32" y="302" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">PST</text>
+  <text x="32" y="302" font-family="system-ui,sans-serif" font-size="10" fill="#5a5a5a">PST</text>
 
   <!-- Sidebar: bottom -->
-  <rect x="32" y="800" width="160" height="1" fill="rgba(124,77,255,0.2)"/>
-  <text x="32" y="828" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">&copy; 2026</text>
+  <rect x="32" y="800" width="160" height="1" fill="#7c4dff" opacity="0.2"/>
+  <text x="32" y="828" font-family="system-ui,sans-serif" font-size="10" fill="#5a5a5a">&copy; 2026</text>
 
   <!-- ===== MAIN CONTENT ===== -->
   <g transform="translate(280, 40)">
 
     <!-- Page title -->
     <rect x="0" y="0" width="100" height="3" rx="1.5" fill="#7c4dff"/>
-    <text x="0" y="36" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#fcfcfc">Projects</text>
-    <text x="0" y="58" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">Selected work and side projects</text>
+    <text x="0" y="36" font-family="system-ui,sans-serif" font-size="28" font-weight="700" fill="#fcfcfc">Projects</text>
+    <text x="0" y="58" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Selected work and side projects</text>
 
     <!-- ===== PROJECT CARD 1: TradeIntel ===== -->
     <g transform="translate(0, 90)">
-      <rect x="0" y="0" width="836" height="200" rx="12" fill="url(#cardGrad)" stroke="rgba(252,252,252,0.06)" stroke-width="1" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="836" height="200" rx="12" fill="#141414" stroke="#1a1a1a" stroke-width="1"/>
 
       <!-- Image placeholder -->
-      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="rgba(124,77,255,0.08)"/>
-      <!-- Globe wireframe -->
-      <circle cx="120" cy="100" r="36" stroke="rgba(124,77,255,0.2)" stroke-width="1.5" fill="none"/>
-      <ellipse cx="120" cy="100" rx="36" ry="16" stroke="rgba(124,77,255,0.15)" stroke-width="1" fill="none"/>
-      <path d="M84 100 Q120 70 156 100" stroke="rgba(124,77,255,0.15)" stroke-width="1" fill="none"/>
-      <path d="M84 100 Q120 130 156 100" stroke="rgba(124,77,255,0.15)" stroke-width="1" fill="none"/>
+      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="#1a1a1a"/>
+      <circle cx="120" cy="100" r="36" fill="none" stroke="#7c4dff" stroke-width="1.5" opacity="0.2"/>
+      <ellipse cx="120" cy="100" rx="36" ry="16" fill="none" stroke="#7c4dff" stroke-width="1" opacity="0.15"/>
+      <line x1="84" y1="100" x2="156" y2="100" stroke="#7c4dff" stroke-width="1" opacity="0.15"/>
+      <line x1="120" y1="64" x2="120" y2="136" stroke="#7c4dff" stroke-width="1" opacity="0.15"/>
       <circle cx="120" cy="100" r="4" fill="#7c4dff" opacity="0.4"/>
 
       <!-- Project info -->
-      <text x="268" y="36" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">TradeIntel</text>
-      <rect x="268" y="50" width="90" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="313" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">React</text>
-      <rect x="366" y="50" width="70" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="401" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">Vite</text>
-      <rect x="444" y="50" width="86" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="487" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
+      <text x="268" y="36" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">TradeIntel</text>
+      <rect x="268" y="50" width="90" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="313" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">React</text>
+      <rect x="366" y="50" width="70" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="401" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Vite</text>
+      <rect x="444" y="50" width="86" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="487" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
 
-      <text x="268" y="100" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">Import/Export Intelligence Platform &mdash; </text>
-      <text x="268" y="122" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">Dark/light theme, responsive dashboard, </text>
-      <text x="268" y="144" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">data visualization with interactive charts.</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Import/Export Intelligence Platform &mdash;</text>
+      <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Dark/light theme, responsive dashboard,</text>
+      <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">data visualization with interactive charts.</text>
 
       <!-- View button -->
       <rect x="268" y="164" width="100" height="28" rx="6" fill="none" stroke="#7c4dff" stroke-width="1.5"/>
-      <text x="318" y="183" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">View Project</text>
+      <text x="318" y="183" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#7c4dff">View Project</text>
 
-      <!-- External link arrow -->
-      <text x="720" y="36" font-family="system-ui, sans-serif" font-size="12" fill="#5a5a5a">tradeintels.netlify.app</text>
+      <text x="720" y="36" font-family="system-ui,sans-serif" font-size="12" fill="#5a5a5a">tradeintels.netlify.app</text>
     </g>
 
     <!-- ===== PROJECT CARD 2: UniSearch ===== -->
     <g transform="translate(0, 320)">
-      <rect x="0" y="0" width="836" height="200" rx="12" fill="url(#cardGrad)" stroke="rgba(252,252,252,0.06)" stroke-width="1" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="836" height="200" rx="12" fill="#141414" stroke="#1a1a1a" stroke-width="1"/>
 
       <!-- Image placeholder -->
-      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="rgba(124,77,255,0.08)"/>
-      <!-- Magnifying glass / search motif -->
-      <circle cx="120" cy="96" r="28" stroke="rgba(124,77,255,0.2)" stroke-width="2" fill="none"/>
-      <line x1="140" y1="116" x2="152" y2="128" stroke="rgba(124,77,255,0.2)" stroke-width="3" stroke-linecap="round"/>
-      <rect x="106" y="80" width="28" height="4" rx="2" fill="rgba(124,77,255,0.15)"/>
-      <rect x="106" y="88" width="20" height="4" rx="2" fill="rgba(124,77,255,0.1)"/>
+      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="#1a1a1a"/>
+      <circle cx="120" cy="96" r="28" fill="none" stroke="#7c4dff" stroke-width="2" opacity="0.2"/>
+      <line x1="140" y1="116" x2="152" y2="128" stroke="#7c4dff" stroke-width="3" opacity="0.2"/>
+      <rect x="106" y="80" width="28" height="4" rx="2" fill="#7c4dff" opacity="0.15"/>
+      <rect x="106" y="88" width="20" height="4" rx="2" fill="#7c4dff" opacity="0.1"/>
 
       <!-- Project info -->
-      <text x="268" y="36" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">UniSearch</text>
-      <rect x="268" y="50" width="90" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="313" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">React</text>
-      <rect x="366" y="50" width="86" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="409" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
-      <rect x="460" y="50" width="90" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="505" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">REST API</text>
+      <text x="268" y="36" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">UniSearch</text>
+      <rect x="268" y="50" width="90" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="313" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">React</text>
+      <rect x="366" y="50" width="86" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="409" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
+      <rect x="460" y="50" width="90" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="505" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">REST API</text>
 
-      <text x="268" y="100" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">University Discovery Platform &mdash; Search across </text>
-      <text x="268" y="122" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">15,000+ institutions with table/card views, CSV </text>
-      <text x="268" y="144" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">export, favorites, and visitor analytics.</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">University Discovery Platform &mdash; Search across</text>
+      <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">15,000+ institutions with table/card views, CSV</text>
+      <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">export, favorites, and visitor analytics.</text>
 
       <!-- View button -->
       <rect x="268" y="164" width="100" height="28" rx="6" fill="none" stroke="#7c4dff" stroke-width="1.5"/>
-      <text x="318" y="183" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">View Project</text>
+      <text x="318" y="183" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#7c4dff">View Project</text>
 
-      <text x="720" y="36" font-family="system-ui, sans-serif" font-size="12" fill="#5a5a5a">uni-search-tau.vercel.app</text>
+      <text x="720" y="36" font-family="system-ui,sans-serif" font-size="12" fill="#5a5a5a">uni-search-tau.vercel.app</text>
     </g>
 
     <!-- ===== PROJECT CARD 3: Taste Atlas ===== -->
     <g transform="translate(0, 550)">
-      <rect x="0" y="0" width="836" height="200" rx="12" fill="url(#cardGrad)" stroke="rgba(252,252,252,0.06)" stroke-width="1" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="836" height="200" rx="12" fill="#141414" stroke="#1a1a1a" stroke-width="1"/>
 
       <!-- Image placeholder -->
-      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="rgba(124,77,255,0.08)"/>
-      <!-- Map pin / food motif -->
-      <circle cx="120" cy="96" r="28" stroke="rgba(124,77,255,0.2)" stroke-width="1.5" fill="none"/>
-      <path d="M120 68 L120 124" stroke="rgba(124,77,255,0.15)" stroke-width="1"/>
-      <path d="M92 96 L148 96" stroke="rgba(124,77,255,0.15)" stroke-width="1"/>
-      <circle cx="120" cy="96" r="8" fill="rgba(124,77,255,0.15)"/>
+      <rect x="0" y="0" width="240" height="200" rx="12 0 0 12" fill="#1a1a1a"/>
+      <circle cx="120" cy="96" r="28" fill="none" stroke="#7c4dff" stroke-width="1.5" opacity="0.2"/>
+      <line x1="120" y1="68" x2="120" y2="124" stroke="#7c4dff" stroke-width="1" opacity="0.15"/>
+      <line x1="92" y1="96" x2="148" y2="96" stroke="#7c4dff" stroke-width="1" opacity="0.15"/>
+      <circle cx="120" cy="96" r="8" fill="#7c4dff" opacity="0.15"/>
       <circle cx="120" cy="96" r="3" fill="#7c4dff" opacity="0.4"/>
 
       <!-- Project info -->
-      <text x="268" y="36" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">Taste Atlas</text>
-      <rect x="268" y="50" width="90" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="313" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">React</text>
-      <rect x="366" y="50" width="86" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="409" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
-      <rect x="460" y="50" width="80" height="20" rx="10" fill="rgba(124,77,255,0.12)"/>
-      <text x="500" y="64" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#7c4dff">Lenis</text>
+      <text x="268" y="36" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#fcfcfc">Taste Atlas</text>
+      <rect x="268" y="50" width="90" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="313" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">React</text>
+      <rect x="366" y="50" width="86" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="409" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
+      <rect x="460" y="50" width="80" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
+      <text x="500" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Lenis</text>
 
-      <text x="268" y="100" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">Global Cuisine Explorer &mdash; Interactive map-based </text>
-      <text x="268" y="122" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">food discovery with region filtering, recipe cards, </text>
-      <text x="268" y="144" font-family="system-ui, sans-serif" font-size="13" fill="#8a8a93">and smooth GSAP-powered scroll animations.</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Global Cuisine Explorer &mdash; Interactive map-based</text>
+      <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">food discovery with region filtering, recipe cards,</text>
+      <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">and smooth GSAP-powered scroll animations.</text>
 
       <!-- View button -->
       <rect x="268" y="164" width="100" height="28" rx="6" fill="none" stroke="#7c4dff" stroke-width="1.5"/>
-      <text x="318" y="183" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">View Project</text>
+      <text x="318" y="183" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#7c4dff">View Project</text>
 
-      <text x="720" y="36" font-family="system-ui, sans-serif" font-size="12" fill="#5a5a5a">taste-atlas.vercel.app</text>
+      <text x="720" y="36" font-family="system-ui,sans-serif" font-size="12" fill="#5a5a5a">taste-atlas.vercel.app</text>
     </g>
 
   </g>
