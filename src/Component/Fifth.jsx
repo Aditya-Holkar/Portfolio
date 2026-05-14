@@ -75,6 +75,7 @@ const dj = [
     ],
     proj: [
       {
+        bg: '#15132b',
         img: '/tradeintel-og.svg',
         title: 'Import/Export Intelligence Platform',
         description:
@@ -96,6 +97,7 @@ const dj = [
     ],
     proj: [
       {
+        bg: '#1c1814',
         img: '/unisearch-og.svg',
         title: 'University Discovery Platform',
         description:
@@ -117,11 +119,34 @@ const dj = [
     ],
     proj: [
       {
+        bg: '#2d1b1b',
         img: '/tasteatlas-og.svg',
         title: 'Global Cuisine Discovery Platform',
         description:
           'Built a React + Vite SPA for exploring cuisines worldwide — featuring interactive Leaflet world map with custom markers, MealDB API integration (78+ countries, 200+ recipes), dark/light theme system, favorites & bucket list with localStorage persistence, geolocation-based nearby cuisine discovery, heat map visualization, and responsive design with Tailwind CSS v4.',
         lnk: 'https://taste-atlas.onrender.com/'
+      }
+    ]
+  },
+  {
+    lst: [
+      { label: 'Name', value: 'VibeNews' },
+      { label: 'Role', value: 'Full Stack Developer' },
+      {
+        label: 'Scope',
+        value:
+          'News Aggregation, Search & Filter, Theme System, API Integration'
+      },
+      { label: 'Date', value: '2026' }
+    ],
+    proj: [
+      {
+        bg: '#2d1a00',
+        img: '/vibenews-og.svg',
+        title: 'Curated News Aggregation Platform',
+        description:
+          'Built a React + Vite SPA for curated news discovery — featuring real-time news aggregation with search and category filtering, dark/light theme system, responsive design, and performant client-side routing with Tailwind CSS v4.',
+        lnk: 'https://newsflow-l0r1.onrender.com/'
       }
     ]
   }
@@ -157,7 +182,7 @@ export const Fifth = memo(() => {
             <div className='flex w-full flex-col gap-5'>
               {params.proj.map((project, projectIdx) => (
                 <div key={projectIdx} className='flex flex-col gap-4'>
-                  <div className='w-full h-[220px] rounded-lg bg-[#0d0d0d] flex items-center justify-center p-4'>
+                  <div className='w-full h-[220px] rounded-lg flex items-center justify-center p-4' style={{ backgroundColor: project.bg || '#0d0d0d' }}>
                     <img
                       src={project.img}
                       alt=''

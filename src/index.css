@@ -56,3 +56,17 @@ body {
   margin-bottom: 20px;
   color: var(--text-muted);
 }
+
+/* Loader dots */
+.spn-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  animation: spn-b 0.9s ease-in-out infinite alternate;
+}
+@keyframes spn-b {
+  0% { opacity: 0.2; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}

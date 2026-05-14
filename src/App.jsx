@@ -5,11 +5,15 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Navbar } from './Component/Navbar'
 import { Home } from './Component/Home'
+import { Splash } from './Component/Splash'
+import { useThemeStore } from './Zu-Store/Store'
 
 gsap.registerPlugin(ScrollTrigger)
 
 function App () {
   const progressRef = useRef(null)
+  const ready = useThemeStore((s) => s.ready)
+  const setReady = useThemeStore((s) => s.setReady)
 
   useEffect(() => {
     const lenis = new Lenis()
@@ -37,6 +41,7 @@ function App () {
 
   return (
     <>
+      {!ready && <Splash onDone={setReady} />}
       <div ref={progressRef} className='progress-bar' />
       <div
         className='relative'
