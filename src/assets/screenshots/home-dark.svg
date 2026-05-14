@@ -1,0 +1,169 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#1a1a1a" opacity="0.6"/>
+    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#7c4dff" flood-opacity="0.3"/>
+    </filter>
+    <linearGradient id="sidebarGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#0d0d0d" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0d0d0d"/>
+  <rect width="1200" height="900" fill="url(#dots)"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="224" height="900" fill="url(#sidebarGrad)"/>
+  <rect x="224" y="0" width="1" height="900" fill="rgba(252,252,252,0.06)"/>
+
+  <!-- Sidebar: Brand -->
+  <rect x="32" y="32" width="34" height="34" rx="8" fill="#7c4dff" opacity="0.15"/>
+  <text x="49" y="55" text-anchor="middle" font-family="'Times New Roman',Georgia,serif" font-size="18" font-weight="700" fill="#7c4dff">AH</text>
+  <text x="78" y="53" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#fcfcfc">Aditya Holkar</text>
+
+  <!-- Sidebar: Nav -->
+  <rect x="0" y="90" width="224" height="36" fill="rgba(124,77,255,0.08)"/>
+  <rect x="0" y="90" width="3" height="36" fill="#7c4dff" rx="0 2 2 0"/>
+  <text x="32" y="113" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#fcfcfc" letter-spacing="1.5">HOME</text>
+
+  <text x="32" y="156" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a8a93" letter-spacing="1.5">PROJECTS</text>
+
+  <!-- Sidebar: Theme toggle -->
+  <rect x="32" y="190" width="70" height="30" rx="15" fill="rgba(252,252,252,0.06)"/>
+  <rect x="34" y="192" width="26" height="26" rx="13" fill="#7c4dff"/>
+  <text x="44" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fcfcfc">&#9790;</text>
+  <text x="70" y="209" font-family="system-ui, sans-serif" font-size="10" fill="#8a8a93">&#9725;</text>
+
+  <!-- Sidebar: Clock -->
+  <text x="32" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#8a8a93" letter-spacing="1">CLOCK</text>
+  <text x="32" y="286" font-family="'Courier New',monospace" font-size="24" font-weight="600" fill="#fcfcfc">10:42</text>
+  <text x="32" y="302" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">PST</text>
+
+  <!-- Sidebar: bottom accent line -->
+  <rect x="32" y="800" width="160" height="1" fill="rgba(124,77,255,0.2)"/>
+  <text x="32" y="828" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">&copy; 2026</text>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <g transform="translate(280, 0)">
+
+    <!-- Hero Section -->
+    <rect x="0" y="30" width="860" height="260" rx="12" fill="rgba(255,255,255,0.02)"/>
+    <rect x="0" y="30" width="860" height="260" rx="12" stroke="rgba(252,252,252,0.04)" stroke-width="1" fill="none"/>
+
+    <!-- Profile circle -->
+    <rect x="56" y="70" width="88" height="88" rx="44" fill="#1a1a1a" stroke="rgba(124,77,255,0.3)" stroke-width="2"/>
+    <text x="100" y="120" text-anchor="middle" font-family="'Times New Roman',Georgia,serif" font-size="28" font-weight="700" fill="#7c4dff">AH</text>
+    <circle cx="56" cy="158" r="10" fill="#4caf50" stroke="#0d0d0d" stroke-width="2"/>
+
+    <!-- Name & Title -->
+    <text x="168" y="100" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#fcfcfc">Aditya Holkar</text>
+    <text x="168" y="132" font-family="system-ui, sans-serif" font-size="15" fill="#8a8a93">Frontend Developer &bull; UI Engineer</text>
+
+    <!-- Tags -->
+    <rect x="168" y="150" width="80" height="24" rx="12" fill="rgba(124,77,255,0.12)"/>
+    <text x="208" y="167" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#7c4dff">Available</text>
+    <rect x="258" y="150" width="120" height="24" rx="12" fill="rgba(252,252,252,0.04)"/>
+    <text x="318" y="167" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8a8a93">3+ years exp</text>
+
+    <!-- Email -->
+    <rect x="168" y="190" width="180" height="32" rx="6" fill="rgba(252,252,252,0.03)" stroke="rgba(252,252,252,0.06)" stroke-width="1"/>
+    <text x="182" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#8a8a93">&#9993; aditya@example.com</text>
+
+    <!-- Hero: Chess.com link -->
+    <text x="168" y="256" font-family="system-ui, sans-serif" font-size="12" fill="#5a5a5a">&#9822; Chess.com /adityaholkar</text>
+
+    <!-- Separator -->
+    <rect x="0" y="310" width="860" height="1" fill="rgba(252,252,252,0.05)"/>
+
+    <!-- Social Section -->
+    <text x="0" y="350" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#8a8a93" letter-spacing="2">SOCIAL</text>
+    <rect x="0" y="365" width="860" height="72" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(252,252,252,0.04)" stroke-width="1"/>
+
+    <!-- GitHub -->
+    <rect x="20" y="380" width="48" height="42" rx="8" fill="rgba(252,252,252,0.03)"/>
+    <path d="M34 384 C34 384 34 384 34 384 C37 383 42 385 42 390 L42 392 C42 392 40 394 40 396 L46 392 L50 394" stroke="#8a8a93" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <text x="78" y="394" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#fcfcfc">GitHub</text>
+    <text x="78" y="410" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">github.com/aditya</text>
+
+    <!-- LinkedIn -->
+    <rect x="310" y="380" width="48" height="42" rx="8" fill="rgba(252,252,252,0.03)"/>
+    <rect x="324" y="386" width="20" height="20" rx="3" stroke="#8a8a93" stroke-width="1.5" fill="none"/>
+    <rect x="326" y="396" width="4" height="8" fill="#8a8a93"/>
+    <circle cx="328" cy="390" r="2" fill="#8a8a93"/>
+    <text x="368" y="394" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#fcfcfc">LinkedIn</text>
+    <text x="368" y="410" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">linkedin.com/in/aditya</text>
+
+    <!-- LeetCode -->
+    <rect x="600" y="380" width="48" height="42" rx="8" fill="rgba(252,252,252,0.03)"/>
+    <circle cx="624" cy="400" r="10" stroke="#8a8a93" stroke-width="1.5" fill="none"/>
+    <path d="M620 402 L626 396" stroke="#8a8a93" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="658" y="394" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#fcfcfc">LeetCode</text>
+    <text x="658" y="410" font-family="system-ui, sans-serif" font-size="10" fill="#5a5a5a">leetcode.com/aditya</text>
+
+    <!-- Separator -->
+    <rect x="0" y="455" width="860" height="1" fill="rgba(252,252,252,0.05)"/>
+
+    <!-- Education Section -->
+    <text x="0" y="495" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#8a8a93" letter-spacing="2">EDUCATION</text>
+    <rect x="0" y="510" width="860" height="70" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(252,252,252,0.04)" stroke-width="1"/>
+
+    <rect x="20" y="522" width="24" height="24" rx="6" fill="rgba(124,77,255,0.12)"/>
+    <text x="32" y="538" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">&#8746;</text>
+    <text x="56" y="536" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#fcfcfc">BSc Computer Science</text>
+    <text x="56" y="556" font-family="system-ui, sans-serif" font-size="12" fill="#8a8a93">University of Pune &bull; 2022 &ndash; 2025</text>
+    <text x="800" y="536" font-family="system-ui, sans-serif" font-size="12" fill="#5a5a5a">CGPA: 8.2</text>
+
+    <!-- Separator -->
+    <rect x="0" y="598" width="860" height="1" fill="rgba(252,252,252,0.05)"/>
+
+    <!-- Skills Section -->
+    <text x="0" y="638" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#8a8a93" letter-spacing="2">SKILLS</text>
+    <rect x="0" y="653" width="860" height="80" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(252,252,252,0.04)" stroke-width="1"/>
+
+    <!-- Skill chips -->
+    <rect x="20" y="670" width="80" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="60" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">React</text>
+
+    <rect x="110" y="670" width="86" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="153" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Tailwind</text>
+
+    <rect x="206" y="670" width="74" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="243" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">GSAP</text>
+
+    <rect x="290" y="670" width="80" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="330" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Vite</text>
+
+    <rect x="380" y="670" width="74" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="417" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Zustand</text>
+
+    <rect x="464" y="670" width="74" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="501" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Lenis</text>
+
+    <rect x="548" y="670" width="88" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="592" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Node.js</text>
+
+    <rect x="646" y="670" width="80" height="32" rx="16" fill="rgba(124,77,255,0.12)" stroke="rgba(124,77,255,0.2)" stroke-width="1"/>
+    <text x="686" y="690" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">Figma</text>
+
+    <!-- Separator -->
+    <rect x="0" y="751" width="860" height="1" fill="rgba(252,252,252,0.05)"/>
+
+    <!-- Experience Section -->
+    <text x="0" y="791" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#8a8a93" letter-spacing="2">EXPERIENCE</text>
+    <rect x="0" y="806" width="860" height="70" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(252,252,252,0.04)" stroke-width="1"/>
+
+    <rect x="20" y="818" width="24" height="24" rx="6" fill="rgba(124,77,255,0.12)"/>
+    <text x="32" y="834" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7c4dff">&#9632;</text>
+    <text x="56" y="832" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#fcfcfc">Frontend Developer &mdash; Capslock Studio</text>
+    <text x="56" y="852" font-family="system-ui, sans-serif" font-size="12" fill="#8a8a93">Jan 2024 &ndash; Present &bull; Remote</text>
+    <text x="800" y="832" font-family="system-ui, sans-serif" font-size="11" fill="#7c4dff">Full-time</text>
+
+  </g>
+</svg>
