@@ -20,8 +20,8 @@
   <!-- Sidebar: Theme toggle -->
   <rect x="32" y="190" width="70" height="30" rx="15" fill="#eee"/>
   <rect x="60" y="192" width="26" height="26" rx="13" fill="#5c6bc0"/>
-  <text x="44" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8a8a93">&#9790;</text>
-  <text x="73" y="209" font-family="system-ui,sans-serif" font-size="10" fill="#ffffff">&#9725;</text>
+  <text x="44" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8a8a93">○</text>
+  <text x="73" y="209" font-family="system-ui,sans-serif" font-size="10" fill="#ffffff">●</text>
 
   <!-- Sidebar: Clock -->
   <text x="32" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#8a8a93" letter-spacing="1">CLOCK</text>
@@ -30,7 +30,7 @@
 
   <!-- Sidebar: bottom -->
   <rect x="32" y="800" width="160" height="1" fill="#5c6bc0" opacity="0.15"/>
-  <text x="32" y="828" font-family="system-ui,sans-serif" font-size="10" fill="#b0b0b0">&copy; 2026</text>
+  <text x="32" y="828" font-family="system-ui,sans-serif" font-size="10" fill="#b0b0b0">© 2026</text>
 
   <!-- ===== MAIN CONTENT ===== -->
   <g transform="translate(280, 0)">
@@ -46,7 +46,7 @@
 
     <!-- Name & Title -->
     <text x="168" y="100" font-family="system-ui,sans-serif" font-size="28" font-weight="700" fill="#1a1a1a">Aditya Holkar</text>
-    <text x="168" y="132" font-family="system-ui,sans-serif" font-size="15" fill="#6b6b6b">Frontend Developer &bull; UI Engineer</text>
+    <text x="168" y="132" font-family="system-ui,sans-serif" font-size="15" fill="#6b6b6b">Frontend Developer · UI Engineer</text>
 
     <!-- Tags -->
     <rect x="168" y="150" width="80" height="24" rx="12" fill="#5c6bc0" opacity="0.1"/>
@@ -56,10 +56,10 @@
 
     <!-- Email -->
     <rect x="168" y="190" width="180" height="32" rx="6" fill="#000" opacity="0.02" stroke="#000" stroke-width="1" stroke-opacity="0.06"/>
-    <text x="182" y="210" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">&#9993; aditya@example.com</text>
+    <text x="182" y="210" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">✉ aditya@example.com</text>
 
     <!-- Chess link -->
-    <text x="168" y="256" font-family="system-ui,sans-serif" font-size="12" fill="#b0b0b0">&#9822; Chess.com /adityaholkar</text>
+    <text x="168" y="256" font-family="system-ui,sans-serif" font-size="12" fill="#b0b0b0">♞ Chess.com /adityaholkar</text>
 
     <!-- Separator -->
     <rect x="0" y="310" width="860" height="1" fill="#000" opacity="0.06"/>
@@ -98,9 +98,9 @@
     <rect x="0" y="510" width="860" height="70" rx="10" fill="none" stroke="#e0e0e0" stroke-width="1"/>
 
     <rect x="20" y="522" width="24" height="24" rx="6" fill="#5c6bc0" opacity="0.1"/>
-    <text x="32" y="538" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5c6bc0">&#8746;</text>
+    <text x="32" y="538" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5c6bc0">Σ</text>
     <text x="56" y="536" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">BSc Computer Science</text>
-    <text x="56" y="556" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">University of Pune &bull; 2022 &ndash; 2025</text>
+    <text x="56" y="556" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">University of Pune · 2022 – 2025</text>
     <text x="800" y="536" font-family="system-ui,sans-serif" font-size="12" fill="#b0b0b0">CGPA: 8.2</text>
 
     <!-- Separator -->
@@ -138,9 +138,9 @@
     <rect x="0" y="806" width="860" height="70" rx="10" fill="none" stroke="#e0e0e0" stroke-width="1"/>
 
     <rect x="20" y="818" width="24" height="24" rx="6" fill="#5c6bc0" opacity="0.1"/>
-    <text x="32" y="834" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5c6bc0">&#9632;</text>
-    <text x="56" y="832" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">Frontend Developer &mdash; Capslock Studio</text>
-    <text x="56" y="852" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">Jan 2024 &ndash; Present &bull; Remote</text>
+    <text x="32" y="834" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5c6bc0">■</text>
+    <text x="56" y="832" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">Frontend Developer — Capslock Studio</text>
+    <text x="56" y="852" font-family="system-ui,sans-serif" font-size="12" fill="#6b6b6b">Jan 2024 – Present · Remote</text>
     <text x="800" y="832" font-family="system-ui,sans-serif" font-size="11" fill="#5c6bc0">Full-time</text>
 
   </g>

@@ -20,8 +20,8 @@
   <!-- Sidebar: Theme toggle -->
   <rect x="32" y="190" width="70" height="30" rx="15" fill="#1a1a1a"/>
   <rect x="34" y="192" width="26" height="26" rx="13" fill="#7c4dff"/>
-  <text x="44" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fcfcfc">&#9790;</text>
-  <text x="70" y="209" font-family="system-ui,sans-serif" font-size="10" fill="#8a8a93">&#9725;</text>
+  <text x="44" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#fcfcfc">○</text>
+  <text x="70" y="209" font-family="system-ui,sans-serif" font-size="10" fill="#8a8a93">●</text>
 
   <!-- Sidebar: Clock -->
   <text x="32" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#5a5a5a" letter-spacing="1">CLOCK</text>
@@ -30,7 +30,7 @@
 
   <!-- Sidebar: bottom -->
   <rect x="32" y="800" width="160" height="1" fill="#7c4dff" opacity="0.2"/>
-  <text x="32" y="828" font-family="system-ui,sans-serif" font-size="10" fill="#5a5a5a">&copy; 2026</text>
+  <text x="32" y="828" font-family="system-ui,sans-serif" font-size="10" fill="#5a5a5a">© 2026</text>
 
   <!-- ===== MAIN CONTENT ===== -->
   <g transform="translate(280, 40)">
@@ -61,7 +61,7 @@
       <rect x="444" y="50" width="86" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
       <text x="487" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Tailwind</text>
 
-      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Import/Export Intelligence Platform &mdash;</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Import/Export Intelligence Platform —</text>
       <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Dark/light theme, responsive dashboard,</text>
       <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">data visualization with interactive charts.</text>
 
@@ -92,7 +92,7 @@
       <rect x="460" y="50" width="90" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
       <text x="505" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">REST API</text>
 
-      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">University Discovery Platform &mdash; Search across</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">University Discovery Platform — Search across</text>
       <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">15,000+ institutions with table/card views, CSV</text>
       <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">export, favorites, and visitor analytics.</text>
 
@@ -124,7 +124,7 @@
       <rect x="460" y="50" width="80" height="20" rx="10" fill="#7c4dff" opacity="0.12"/>
       <text x="500" y="64" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#7c4dff">Lenis</text>
 
-      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Global Cuisine Explorer &mdash; Interactive map-based</text>
+      <text x="268" y="100" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">Global Cuisine Explorer — Interactive map-based</text>
       <text x="268" y="122" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">food discovery with region filtering, recipe cards,</text>
       <text x="268" y="144" font-family="system-ui,sans-serif" font-size="13" fill="#8a8a93">and smooth GSAP-powered scroll animations.</text>
 
