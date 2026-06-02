@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="100%" stop-color="#060912"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="gear" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.02" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/>
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="1200" y1="0" x2="1200" y2="630"/>
+  </g>
+
+  <!-- Gear decoration -->
+  <g transform="translate(830, 260)" opacity="0.1" fill="none" stroke="url(#accent)" stroke-width="1.5">
+    <circle cx="0" cy="0" r="50"/>
+    <circle cx="0" cy="0" r="20" stroke-width="1"/>
+    <rect x="-6" y="-65" width="12" height="30" rx="3"/>
+    <rect x="-6" y="35" width="12" height="30" rx="3"/>
+    <rect x="-65" y="-6" width="30" height="12" rx="3"/>
+    <rect x="35" y="-6" width="30" height="12" rx="3"/>
+    <rect x="28" y="-52" width="12" height="22" rx="3" transform="rotate(45 34 -41)"/>
+    <rect x="-40" y="-52" width="12" height="22" rx="3" transform="rotate(-45 -34 -41)"/>
+    <rect x="28" y="30" width="12" height="22" rx="3" transform="rotate(-45 34 41)"/>
+    <rect x="-40" y="30" width="12" height="22" rx="3" transform="rotate(45 -34 41)"/>
+  </g>
+
+  <g transform="translate(100, 180)">
+    <rect x="0" y="0" width="64" height="4" rx="2" fill="url(#accent)"/>
+
+    <text x="0" y="80" font-family="'Segoe UI', system-ui, sans-serif" font-size="82" font-weight="300" fill="#f7f7f7" letter-spacing="0.02em">Niru Bhau</text>
+
+    <text x="0" y="130" font-family="'Segoe UI', system-ui, sans-serif" font-size="22" font-weight="400" fill="#929aab" letter-spacing="0.08em" text-transform="uppercase">Mechanical Design Portfolio</text>
+
+    <rect x="0" y="165" width="48" height="2" rx="1" fill="url(#accent)" fill-opacity="0.6"/>
+
+    <g transform="translate(0, 210)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">Interactive 3D Gear Model (Three.js)</text>
+    </g>
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">Dark / Light Theme + Particle Physics</text>
+    </g>
+    <g transform="translate(0, 270)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">Framer Motion + Glassmorphism UI</text>
+    </g>
+  </g>
+</svg>

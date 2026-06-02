@@ -12,9 +12,13 @@ dist
 dist-ssr
 *.local
 
+scripts
 
 agents
 AGENTS.md
+SKILLS.md
+linkedin-guide.md
+
 
 # Editor directories and files
 .vscode/*
