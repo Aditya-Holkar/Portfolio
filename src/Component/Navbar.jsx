@@ -71,7 +71,11 @@ export const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
-  const navLinks = [{ to: "/", label: "Home" }, { to: "/projects", label: "Projects" }];
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/projects", label: "Projects" },
+    { to: "/resume", label: "Resume" },
+  ];
 
   return (
     <>

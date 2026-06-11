@@ -1,5 +1,5 @@
 export const projectsData = [
-  {
+  { category: "hand",
     lst: [
       { label: "Name", value: "Capslock Design System" },
       { label: "Role", value: "Frontend Design System Engineer" },
@@ -19,7 +19,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "hand",
     lst: [
       { label: "Name", value: "Capslock Data Studio" },
       { label: "Role", value: "Full Stack Developer" },
@@ -39,7 +39,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "hand",
     lst: [
       { label: "Name", value: "Capslock Studios" },
       { label: "Role", value: "Product/Website Maintenance" },
@@ -59,7 +59,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "ai",
     lst: [
       { label: "Name", value: "BookChat" },
       { label: "Role", value: "Full Stack Developer" },
@@ -80,7 +80,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "ai",
     lst: [
       { label: "Name", value: "Niru Bhau Portfolio" },
       { label: "Role", value: "Frontend Developer" },
@@ -101,7 +101,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "ai",
     lst: [
       { label: "Name", value: "Story Maker" },
       { label: "Role", value: "Full Stack Developer" },
@@ -122,7 +122,49 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "ai",
+    lst: [
+      { label: "Name", value: "AI Analyst Suite" },
+      { label: "Role", value: "Full Stack Developer" },
+      {
+        label: "Scope",
+        value: "Multi-Provider AI, Parallel Analysis, Structured Dashboards, Auth Flow",
+      },
+      { label: "Date", value: "2025" },
+    ],
+    proj: [
+      {
+        bg: "#1a1a2e",
+        img: "/analyst-og.svg",
+        title: "AI-Powered Business Analysis Platform",
+        description:
+          "Built a React 18 SPA that takes a business idea and runs parallel AI analysis across 6 analyst personas using 7 LLM providers with auto-fallback. Features structured dashboards with real-time streaming KPIs, Recharts visualizations, TanStack tables, insight boxes, floating chat for follow-up Q&A, password-gated unlimited access, and HTML/Word/PDF export with Framer Motion animations.",
+        lnk: "https://idea-analyst.vercel.app/",
+      },
+    ],
+  },
+  { category: "ai",
+    lst: [
+      { label: "Name", value: "LLM Evaluation Dashboard" },
+      { label: "Role", value: "Full Stack Developer" },
+      {
+        label: "Scope",
+        value: "LLM Benchmarking, Multi-Model Evaluation, Metrics, Charts, Export",
+      },
+      { label: "Date", value: "2026" },
+    ],
+    proj: [
+      {
+        bg: "#0f1923",
+        img: "/llmchecker-og.svg",
+        title: "LLM Model Evaluation & Benchmarking Dashboard",
+        description:
+          "Built a React 19 SPA for evaluating and comparing 7 LLM models (GPT-3.5, GPT-4o, Gemini 2.0 Flash, Llama 3.3 70B, DeepSeek V3, Mistral 7B, Qwen 2.5 72B) — featuring 14 performance metrics (latency, throughput, token usage, cost analysis), interactive Recharts visualizations, real-time evaluation with streaming responses, model comparison grids, password-gated demo access, cost analytics, and dark/light theme support with Tailwind CSS v4 and Radix UI primitives.",
+        lnk: "https://llm-evalution-flax.vercel.app/",
+      },
+    ],
+  },
+  { category: "ai",
     lst: [
       { label: "Name", value: "Taste Atlas" },
       { label: "Role", value: "Frontend Developer" },
@@ -144,7 +186,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "ai",
     lst: [
       { label: "Name", value: "TradeIntel" },
       { label: "Role", value: "Frontend Developer" },
@@ -166,7 +208,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "hand",
     lst: [
       { label: "Name", value: "UniSearch" },
       { label: "Role", value: "Frontend Developer" },
@@ -188,7 +230,7 @@ export const projectsData = [
       },
     ],
   },
-  {
+  { category: "hand",
     lst: [
       { label: "Name", value: "VibeNews" },
       { label: "Role", value: "Full Stack Developer" },

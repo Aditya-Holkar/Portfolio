@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1923"/>
+      <stop offset="100%" stop-color="#0a0f14"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.02" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/>
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="1200" y1="0" x2="1200" y2="630"/>
+  </g>
+
+  <!-- Bar chart decoration -->
+  <g transform="translate(830, 200)" opacity="0.1" fill="none" stroke="url(#accent)" stroke-width="1.2">
+    <rect x="0" y="60" width="24" height="60" rx="2"/>
+    <rect x="34" y="30" width="24" height="90" rx="2"/>
+    <rect x="68" y="45" width="24" height="75" rx="2"/>
+    <rect x="102" y="10" width="24" height="110" rx="2"/>
+    <rect x="136" y="55" width="24" height="65" rx="2"/>
+    <rect x="170" y="20" width="24" height="100" rx="2"/>
+  </g>
+
+  <g transform="translate(100, 180)">
+    <rect x="0" y="0" width="64" height="4" rx="2" fill="url(#accent)"/>
+
+    <text x="0" y="80" font-family="'Segoe UI', system-ui, sans-serif" font-size="72" font-weight="300" fill="#f7f7f7" letter-spacing="0.02em">LLM Evaluation</text>
+
+    <text x="0" y="130" font-family="'Segoe UI', system-ui, sans-serif" font-size="22" font-weight="400" fill="#929aab" letter-spacing="0.08em" text-transform="uppercase">Model Benchmarking Dashboard</text>
+
+    <rect x="0" y="165" width="48" height="2" rx="1" fill="url(#accent)" fill-opacity="0.6"/>
+
+    <g transform="translate(0, 210)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">7 Models: GPT-4o · Gemini · Llama · DeepSeek · Mistral · Qwen</text>
+    </g>
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">14 Performance Metrics · Real-Time Evaluation</text>
+    </g>
+    <g transform="translate(0, 270)">
+      <rect x="0" y="0" width="8" height="8" rx="2" fill="url(#accent)" fill-opacity="0.4"/>
+      <text x="22" y="9" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#929aab">Charts · Cost Analytics · Dark/Light Theme</text>
+    </g>
+  </g>
+</svg>

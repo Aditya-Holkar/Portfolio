@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Navbar } from './Component/Navbar'
 import { Home } from './Component/Home'
 import { Projects } from './Component/Projects'
+import { Resume } from './Component/Resume'
+
 import { Splash } from './Component/Splash'
 import { RouteLoader } from './Component/RouteLoader'
 import { Footer } from './Component/Footer'
@@ -64,7 +66,10 @@ function App () {
         <div className='z-10 h-fit p-[128px_20px_20px_240px] max-md:px-4 max-md:pt-20'>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/projects/ai-assisted' element={<Projects />} />
+            <Route path='/projects/handcode' element={<Projects />} />
             <Route path='/projects' element={<Projects />} />
+            <Route path='/resume' element={<Resume />} />
           </Routes>
           <div className='pb-10 pt-16'>
             <Footer />

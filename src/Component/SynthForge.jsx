@@ -1,52 +1,26 @@
 import { memo } from 'react'
-import { Link, useLocation } from 'react-router'
 import { Button } from './Button'
 import { projectsData } from '../Data/ProjectsData'
 
-const tabs = [
-  { to: '/projects/ai-assisted', label: 'AI Assisted', category: 'ai', info: 'Projects using AI Agents, Prompt Engineering & LLMs' },
-  { to: '/projects/handcode', label: 'HandCode', category: 'hand', info: 'Hand-crafted front-end projects built from scratch' },
-]
+const aiProjects = projectsData.filter(p => p.category === 'ai')
 
-export const Projects = memo(() => {
-  const loc = useLocation()
-  const active = tabs.find(t => t.to === loc.pathname) || tabs[0]
-  const filtered = active.category
-    ? projectsData.filter(p => p.category === active.category)
-    : projectsData
-
+export const SynthForge = memo(() => {
   return (
     <div className='flex flex-col gap-12'>
-      <div className='hidden md:flex flex-row items-baseline gap-1 pb-1'>
-        <span className='text-5xl font-black tracking-tight' style={{ color: 'var(--text)' }}>
-          {active.label}
-        </span>
-        <span className='text-3xl font-extralight' style={{ color: 'var(--text-muted)' }}>/</span>
-        <span className='text-xl font-light tracking-wide' style={{ color: 'var(--text-muted)' }}>
-          {active.info}
-        </span>
+      <div className='flex flex-row gap-4 max-md:flex-col'>
+        <div className='section-label flex-1 text-xs font-medium uppercase tracking-widest'>
+          Category
+        </div>
+        <div className='flex flex-[5] flex-col gap-2'>
+          <h1 className='text-4xl font-bold tracking-tight'>SynthForge</h1>
+          <p className='max-w-2xl text-sm leading-relaxed' style={{ color: 'var(--text-muted)' }}>
+            AI-augmented projects — powered by LLMs, vector search, and intelligent automation.
+          </p>
+        </div>
       </div>
 
-      <div className='flex flex-wrap gap-3 p-3 border-b max-md:fixed max-md:top-16 max-md:left-0 max-md:right-0 max-md:z-10 md:fixed md:z-10 md:top-0 md:left-60 md:right-5' style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border-subtle)' }}>
-        {tabs.map(t => (
-          <Link
-            key={t.to}
-            to={t.to}
-            className='cursor-pointer rounded-xl border px-4 py-2.5 text-left transition-colors max-md:flex-1'
-            style={{
-              borderColor: active.to === t.to ? 'var(--accent)' : 'var(--border-subtle)',
-              backgroundColor: active.to === t.to ? 'var(--bg-secondary)' : 'transparent',
-              textDecoration: 'none',
-            }}
-          >
-            <div className='text-sm font-bold' style={{ color: active.to === t.to ? 'var(--accent)' : 'var(--text)' }}>{t.label}</div>
-            {t.info && <div className='mt-0.5 text-[11px] leading-tight' style={{ color: 'var(--text-muted)' }}>{t.info}</div>}
-          </Link>
-        ))}
-      </div>
-
-      <div className='flex flex-col gap-15 pt-24 md:pt-16'>
-        {filtered.map((params, idx) => (
+      <div className='flex flex-col gap-15'>
+        {aiProjects.map((params, idx) => (
           <div
             key={idx}
             className='flex flex-row border-t-2 p-[28px_8px_0px_8px] max-md:flex-col'
