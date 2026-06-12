@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Holkar — Resume Builder</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#e2e8f0;font-family:'Inter',system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;align-items:center;padding:30px 20px}
+
+  .controls{position:fixed;top:20px;right:20px;z-index:100;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,.12);width:240px;font-size:12px;display:flex;flex-direction:column;gap:10px}
+  .controls h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e293b;margin:0 0 2px}
+  .ctrl-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .ctrl-row label{color:#475569;font-size:11px;min-width:60px}
+  .ctrl-row input[type=range]{flex:1;accent-color:#2563eb}
+  .ctrl-row .val{color:#2563eb;font-weight:600;font-size:11px;min-width:36px;text-align:right}
+  .ctrl-actions{display:flex;gap:6px;margin-top:2px;flex-wrap:wrap}
+  .ctrl-actions button{flex:1;min-width:60px;padding:7px 0;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .15s}
+  .ctrl-actions button:hover{opacity:.85}
+  .btn-word{background:#2563eb;color:#fff}
+  .btn-print{background:#2563eb;color:#fff}
+
+  :root{--sec-gap:12px;--line-h:1.55;--body-s:11px;--padt:46px;--padb:46px}
+
+  .page{width:210mm;min-height:297mm;background:#fff;padding:var(--padt) 55px var(--padb);box-shadow:0 4px 24px rgba(0,0,0,.08);border-radius:2px;margin-bottom:30px;page-break-after:always;position:relative}
+  h1{font-size:28px;font-weight:900;color:#1e293b;letter-spacing:-.5px;margin:0 0 6px;outline:none;padding:2px 4px;border-radius:4px;transition:background .15s}
+  h1:hover{background:#f8fafc}
+  h1:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .title{font-size:13px;color:#2563eb;font-weight:500;margin:0 0 5px;outline:none;padding:2px 4px;border-radius:4px}
+  .title:hover{background:#f8fafc}
+  .title:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .contact{font-size:10.5px;color:#64748b;margin:0 0 14px;line-height:1.55;word-break:break-word;outline:none;padding:2px 4px;border-radius:4px}
+  .contact:hover{background:#f8fafc}
+  .contact:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .divider{height:1.5px;background:#cbd5e1;margin:0 0 var(--sec-gap);width:100%}
+
+  .section{position:relative;padding:4px 0;border-radius:6px;transition:background .15s}
+  .section:hover{background:#fafbfc}
+  .section:hover .sec-actions{opacity:1}
+  .sec-actions{position:absolute;top:0;right:-32px;display:flex;flex-direction:column;gap:2px;opacity:0;transition:opacity .15s;z-index:10}
+  .sec-actions button{width:24px;height:24px;border:none;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .sec-del{background:#fee2e2;color:#dc2626}
+  .sec-del:hover{background:#fecaca}
+  .sec-add{background:#dbeafe;color:#2563eb}
+  .sec-add:hover{background:#bfdbfe}
+
+  .section-label{font-size:12px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.5px;margin:0 0 8px;outline:none;padding:2px 4px;border-radius:4px}
+  .section-label:hover{background:#f8fafc}
+  .section-label:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+
+  .summary{font-size:var(--body-s);color:#334155;line-height:var(--line-h);text-align:justify;margin:0;outline:none;padding:2px 4px;border-radius:4px}
+  .summary:hover{background:#f8fafc}
+  .summary:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+
+  .skill-row{font-size:var(--body-s);margin:0 0 4px;line-height:var(--line-h);color:#334155;outline:none;padding:2px 4px;border-radius:4px;position:relative;display:flex;align-items:center;gap:4px}
+  .skill-row:hover{background:#f8fafc}
+  .skill-row:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .skill-row strong{font-weight:600;color:#1e293b}
+  .skill-row .item-del{display:none;width:16px;height:16px;border:none;border-radius:4px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:9px;align-items:center;justify-content:center;flex-shrink:0}
+  .skill-row:hover .item-del{display:flex}
+
+  .exp-section{position:relative}
+  .exp-header{font-size:13px;font-weight:600;color:#1e293b;margin:0;outline:none;padding:2px 4px;border-radius:4px}
+  .exp-header:hover{background:#f8fafc}
+  .exp-header:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .exp-location{font-size:11px;color:#64748b;font-weight:400;margin-left:6px;outline:none;padding:1px 3px;border-radius:3px}
+  .exp-location:hover{background:#f8fafc}
+  .exp-location:focus{background:#eff6ff}
+  .exp-role{font-size:12px;color:#2563eb;font-weight:600;margin:8px 0 0;outline:none;padding:2px 4px;border-radius:4px}
+  .exp-role:hover{background:#f8fafc}
+  .exp-role:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .exp-period{font-size:11px;color:#64748b;font-weight:400;margin-left:8px;outline:none;padding:1px 3px;border-radius:3px}
+  .exp-period:hover{background:#f8fafc}
+  .exp-period:focus{background:#eff6ff}
+  .exp-bullets{list-style:none;padding:0;margin:10px 0 0}
+  .exp-bullets li{font-size:var(--body-s);color:#334155;line-height:var(--line-h);padding:2px 0 2px 20px;position:relative;margin:0 0 5px;outline:none;border-radius:4px}
+  .exp-bullets li:hover{background:#f8fafc}
+  .exp-bullets li:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .exp-bullets li::before{content:"\2022";position:absolute;left:3px;top:2px;color:#2563eb;font-weight:700}
+  .exp-bullets li .item-del{display:none;position:absolute;right:4px;top:4px;width:18px;height:18px;border:none;border-radius:4px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:9px;align-items:center;justify-content:center}
+  .exp-bullets li:hover .item-del{display:flex}
+  .add-bullet{display:none;font-size:10px;color:#2563eb;background:none;border:1px dashed #93c5fd;border-radius:6px;padding:4px 10px;cursor:pointer;margin-top:2px;font-family:'Inter',sans-serif;transition:all .15s}
+  .add-bullet:hover{background:#eff6ff}
+  .exp-section:hover .add-bullet{display:inline-block}
+
+  .edu-name{font-size:12px;font-weight:600;color:#1e293b;margin:0 0 12px;outline:none;padding:2px 4px;border-radius:4px}
+  .edu-name:hover{background:#f8fafc}
+  .edu-name:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .edu-detail{font-size:var(--body-s);color:#334155;margin:0;line-height:var(--line-h);outline:none;padding:2px 4px;border-radius:4px}
+  .edu-detail:hover{background:#f8fafc}
+  .edu-detail:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .edu-detail .date{color:#64748b;margin-left:8px}
+  .edu-detail .cgpa{color:#2563eb;font-weight:600;margin-left:14px}
+
+  .project{page-break-inside:avoid;break-inside:avoid;padding:6px 0;position:relative;border-radius:6px;transition:background .15s}
+  .project:hover{background:#fafbfc}
+  .project:hover .proj-actions{opacity:1}
+  .proj-actions{position:absolute;top:6px;right:-32px;display:flex;flex-direction:column;gap:2px;opacity:0;transition:opacity .15s;z-index:10}
+  .proj-actions button{width:24px;height:24px;border:none;border-radius:6px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .proj-del{background:#fee2e2;color:#dc2626}
+  .proj-del:hover{background:#fecaca}
+  .proj-move{background:#f1f5f9;color:#475569}
+  .proj-move:hover{background:#e2e8f0}
+
+  .project-header{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .project-name{font-size:12px;font-weight:600;color:#1e293b;outline:none;padding:1px 3px;border-radius:3px}
+  .project-name:hover{background:#f8fafc}
+  .project-name:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .project-role{font-size:11px;color:#2563eb;font-weight:500;outline:none;padding:1px 3px;border-radius:3px}
+  .project-role:hover{background:#f8fafc}
+  .project-role:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .project-tech{font-size:10px;color:#64748b;font-style:italic;margin:2px 0 0;outline:none;padding:1px 3px;border-radius:3px}
+  .project-tech:hover{background:#f8fafc}
+  .project-tech:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .project-desc{font-size:var(--body-s);color:#334155;line-height:var(--line-h);text-align:justify;margin:3px 0 0;outline:none;padding:2px 4px;border-radius:4px}
+  .project-desc:hover{background:#f8fafc}
+  .project-desc:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
+  .project-link{font-size:10px;color:#2563eb;margin:2px 0 0;word-break:break-all;outline:none;padding:1px 3px;border-radius:3px}
+  .project-link:hover{background:#f8fafc}
+  .project-link:focus{background:#eff6ff}
+  .project-divider{height:1px;background:#e2e8f0;margin:8px 0;width:100%}
+
+  .add-project{display:block;width:100%;padding:8px 0;font-size:11px;color:#2563eb;background:none;border:1.5px dashed #93c5fd;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all .15s;margin-top:4px}
+  .add-project:hover{background:#eff6ff;border-color:#2563eb}
+
+  .section + .divider{margin-top:calc(var(--sec-gap) * 1.2)}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .controls{display:none !important}
+    .sec-actions,.proj-actions,.item-del,.add-bullet,.add-project{display:none !important}
+    .page{box-shadow:none;border-radius:0;margin:0;min-height:auto}
+    .project,.section{break-inside:avoid;page-break-inside:avoid}
+    [contenteditable]{outline:none !important;background:transparent !important}
+  }
+
+  @page{size:A4;margin:0}
+
+  @media(max-width:800px){
+    .controls{position:static;width:100%;max-width:210mm;margin-bottom:16px}
+    .sec-actions,.proj-actions{right:4px;opacity:1;flex-direction:row}
+    .page{padding:20px 16px}
+    body{padding:10px}
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <h3>Layout</h3>
+  <div class="ctrl-row"><label>Section Gap</label><input type="range" id="secGap" min="6" max="28" value="16" step="1"><span class="val" id="secGapVal">16</span></div>
+  <div class="ctrl-row"><label>Line Height</label><input type="range" id="lineH" min="1.2" max="2.0" value="1.55" step="0.05"><span class="val" id="lineHVal">1.55</span></div>
+  <div class="ctrl-row"><label>Body Font</label><input type="range" id="bodyS" min="9" max="14" value="11" step="0.5"><span class="val" id="bodySVal">11</span></div>
+  <div class="ctrl-row"><label>Top Padding</label><input type="range" id="padT" min="30" max="70" value="46" step="1"><span class="val" id="padTVal">46</span></div>
+  <div class="ctrl-row"><label>Bot Padding</label><input type="range" id="padB" min="30" max="70" value="46" step="1"><span class="val" id="padBVal">46</span></div>
+  <div class="ctrl-actions">
+    <button class="btn-word" onclick="saveWord()">Save Word</button>
+    <button class="btn-reset" onclick="localStorage.removeItem('resumeHTML');location.reload()">Reset</button>
+  </div>
+</div>
+
+<div class="page" id="resumePage">
+
+<h1 id="el-name" contenteditable spellcheck="false">ADITYA HOLKAR</h1>
+<div class="title" id="el-title" contenteditable spellcheck="false">Frontend Developer · React · TypeScript · Design Systems · AI-Augmented Engineering</div>
+<div class="contact" id="el-contact" contenteditable spellcheck="false">adiholkar555@gmail.com | Pune, India | GitHub: github.com/Aditya-Holkar | LinkedIn: linkedin.com/in/aditya-holkar</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-summary">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-summary')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Professional Summary</div>
+  <p class="summary" contenteditable spellcheck="false">Frontend developer with 2+ years of experience shipping production-grade React and TypeScript applications with component design systems. Architected a 50+ component UI library across 5+ client projects, cutting development time by 40%. Built full-stack data pipelines with REST APIs, Supabase, and Neon DB using Node.js. Developed 7+ AI-augmented applications using multi-provider LLM orchestration, RAG pipelines, and vector embeddings. Skilled in responsive design, accessibility, and performance optimization.</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-skills">
+  <div class="sec-actions">
+    <button class="sec-add" onclick="addSkillRow()" title="Add skill">+</button>
+    <button class="sec-del" onclick="deleteSection('sec-skills')" title="Delete section">✕</button>
+  </div>
+  <div class="section-label" contenteditable spellcheck="false">Technical Skills</div>
+  <div id="skills-container">
+    <div class="skill-row" contenteditable spellcheck="false"><strong>Frontend:</strong> React 18/19, TypeScript, JavaScript ES6+, Vite, Tailwind CSS v4, HTML5/CSS3, GSAP, Framer Motion, Three.js, Responsive Design<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+    <div class="skill-row" contenteditable spellcheck="false"><strong>Testing &amp; Quality:</strong> Jest, React Testing Library, Web Accessibility (WCAG), Cross-Browser Testing, Lighthouse, ESLint<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+    <div class="skill-row" contenteditable spellcheck="false"><strong>Backend &amp; DB:</strong> REST API Integration, Node.js, Supabase, Neon DB, PostgreSQL, Version Control (Git)<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+    <div class="skill-row" contenteditable spellcheck="false"><strong>AI &amp; Data:</strong> Multi-Provider LLM Orchestration, RAG Pipelines, Vector Embeddings, Prompt Engineering, Data Visualization<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+    <div class="skill-row" contenteditable spellcheck="false"><strong>Tools &amp; DevOps:</strong> Git, Vite, Webpack, ESLint, CI/CD, Vercel, Netlify, Render, Chrome DevTools, Agile Development<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-experience">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-experience')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Professional Experience</div>
+  <div class="exp-section" id="exp-capslock">
+    <div class="exp-header" contenteditable spellcheck="false">Capslock Studio Private Limited <span class="exp-location" contenteditable spellcheck="false">Pune, India</span></div>
+    <div class="exp-role" contenteditable spellcheck="false">Frontend Developer <span class="exp-period" contenteditable spellcheck="false">June 2023 — October 2025</span></div>
+    <ul class="exp-bullets" id="exp-bullets">
+      <li contenteditable spellcheck="false">Architected a 50+ component design system in React + Tailwind CSS from scratch, standardizing UI across 5+ client projects and reducing development time by ~40%.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Maintained end-to-end frontend for 5+ production websites, coordinating deployments, bug fixes, and feature additions across 2+ years with 99.9% uptime.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Integrated 15+ REST APIs with Supabase and Neon DB for real-time data sync and serverless PostgreSQL workflows across multiple applications.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Refactored legacy monolithic codebase into modular, scalable architecture, cutting technical debt by 60% and reducing onboarding time for new developers.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Collaborated with design and backend teams to ship accessible, pixel-perfect UI across browsers, achieving 90+ Lighthouse scores on all client properties.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Conducted code reviews, enforced ESLint standards, and followed Agile/Scrum methodology across 2-week sprint cycles.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+    </ul>
+    <button class="add-bullet" onclick="addBullet()">+ Add bullet</button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-education">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-education')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Education</div>
+  <div class="edu-name" contenteditable spellcheck="false">Annasaheb Magar College, Pune (Pune University)</div>
+  <div class="edu-detail" contenteditable spellcheck="false">BSc (Computer Science)<span class="date">July 2019 — July 2022</span><span class="cgpa">CGPA: 7.7</span></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-projects">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-projects')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Projects</div>
+  <div id="projects-container">
+
+    <div class="project" data-idx="0">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">1. Capslock Design System</span><span class="project-role" contenteditable spellcheck="false">Design System Architect</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, TypeScript, Tailwind CSS, Component Architecture</div>
+      <p class="project-desc" contenteditable spellcheck="false">Architected 50+ reusable components in React with TypeScript and Tailwind CSS, eliminating duplicate UI code and standardizing responsive interfaces across all client products.</p>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="1">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">2. Capslock Data Studio</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, REST APIs, Supabase, Neon DB, State Management</div>
+      <p class="project-desc" contenteditable spellcheck="false">Integrated 15+ REST APIs with real-time data fetching and serverless PostgreSQL via Supabase/Neon DB, handling auth, real-time subscriptions, and complex queries.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://email-validation-kappa.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="2">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">3. Capslock Studios — Maintenance</span><span class="project-role" contenteditable spellcheck="false">Production Engineer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Production Support, Performance Optimization</div>
+      <p class="project-desc" contenteditable spellcheck="false">Sole frontend engineer maintaining 5+ live client websites over 2+ years — owning deployments, critical bug fixes, feature rollouts, and performance optimization.</p>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="3">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">4. BookChat</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, RAG Pipeline, Vector Search, Groq LLM</div>
+      <p class="project-desc" contenteditable spellcheck="false">Privacy-first PDF chat app with browser-based RAG using vector embeddings, cosine similarity search, and Groq LLM streaming. Multi-document Q&A with offline resilience.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://book-chat-seven.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="4">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">5. Niru Bhau — 3D Portfolio</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Three.js, Framer Motion, GSAP, Zustand</div>
+      <p class="project-desc" contenteditable spellcheck="false">Interactive 3D portfolio with Three.js MeshTransmissionMaterial gear model, particle system with mouse physics, dark/light theme, and smooth page transitions.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://mech-wwim.onrender.com/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="5">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">6. Story Maker</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Multi-Provider LLM, Leaflet, i18n, Streaming</div>
+      <p class="project-desc" contenteditable spellcheck="false">AI story platform generating narratives from real-world locations via Leaflet map. Multi-provider LLM auto-fallback across 7 providers with streaming output in 75+ languages.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://story-studio-one.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="6">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">7. AI Analyst Suite</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React 18, TypeScript, Multi-Provider AI, Recharts, TanStack</div>
+      <p class="project-desc" contenteditable spellcheck="false">Business analysis platform running parallel AI across 6 analyst personas using 7 LLM providers. Streaming KPI dashboards, TanStack tables, and HTML/Word/PDF export.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://idea-analyst.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="7">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">8. LLM Evaluation Dashboard</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React 19, Radix UI, Recharts, Multi-Model, Cost Analytics</div>
+      <p class="project-desc" contenteditable spellcheck="false">Dashboard evaluating 7 LLMs across 14 metrics — latency, throughput, token usage, cost. Real-time streaming evaluations with comparison grids and dark/light theme.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://llm-evalution-flax.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="8">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">9. Taste Atlas</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Leaflet, MealDB API, Geolocation, LocalStorage</div>
+      <p class="project-desc" contenteditable spellcheck="false">Global cuisine discovery with interactive Leaflet map, MealDB API (78+ countries, 200+ recipes), favorites with localStorage, and geolocation-based discovery.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://taste-atlas.onrender.com/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="9">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">10. TradeIntel</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Vite, Tailwind CSS, Theme System, Responsive Design</div>
+      <p class="project-desc" contenteditable spellcheck="false">Import/export intelligence platform with dark/light theme, responsive data-dashboard layout, and component-driven architecture for data exploration workflows.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://trade-intell.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="10">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">11. UniSearch</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, Vite, API Integration, LocalStorage, CSV Export</div>
+      <p class="project-desc" contenteditable spellcheck="false">University discovery platform ingesting 15,000+ institutions via Hipolabs API. Country-based search with table/card views, favorites, and CSV export.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://uni-search-tau.vercel.app/</div>
+    </div>
+    <div class="project-divider"></div>
+
+    <div class="project" data-idx="11">
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">12. VibeNews</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">React, News API, Client-Side Routing, Theme System</div>
+      <p class="project-desc" contenteditable spellcheck="false">Curated news aggregator with real-time multi-category news fetching, client-side routing, dark/light theme toggle, and responsive layout via Vite.</p>
+      <div class="project-link" contenteditable spellcheck="false">https://newsflow-l0r1.onrender.com/</div>
+    </div>
+
+  </div>
+  <button class="add-project" onclick="addProject()">+ Add Project</button>
+</div>
+
+</div>
+
+<script>
+  // ── Layout controls ──
+  const page = document.getElementById('resumePage');
+  function apply(){
+    document.documentElement.style.setProperty('--sec-gap', document.getElementById('secGap').value + 'px');
+    document.documentElement.style.setProperty('--line-h', document.getElementById('lineH').value);
+    document.documentElement.style.setProperty('--body-s', document.getElementById('bodyS').value + 'px');
+    page.style.paddingTop = document.getElementById('padT').value + 'px';
+    page.style.paddingBottom = document.getElementById('padB').value + 'px';
+    ['secGap','lineH','bodyS','padT','padB'].forEach(id => {
+      document.getElementById(id+'Val').textContent = document.getElementById(id).value;
+    });
+  }
+  document.querySelectorAll('.controls input').forEach(el => el.addEventListener('input', apply));
+  apply();
+
+  // ── Auto-save state ──
+  function saveState(){
+    localStorage.setItem('resumeHTML', document.getElementById('resumePage').innerHTML);
+  }
+  document.addEventListener('input', saveState);
+
+  // ── Restore ──
+  const saved = localStorage.getItem('resumeHTML');
+  if(saved) document.getElementById('resumePage').innerHTML = saved;
+
+  // ── Project CRUD ──
+  function renumber(){
+    document.querySelectorAll('#projects-container > .project').forEach((p, i) => {
+      const name = p.querySelector('.project-name');
+      const old = name.textContent.replace(/^\d+\.\s*/, '');
+      name.textContent = (i + 1) + '. ' + old;
+      p.dataset.idx = i;
+    });
+  }
+
+  function deleteProject(btn){
+    const proj = btn.closest('.project');
+    const div = proj.nextElementSibling;
+    if(div && div.classList.contains('project-divider')) div.remove();
+    proj.remove();
+    renumber();
+    saveState();
+  }
+
+  function moveProject(btn, dir){
+    const proj = btn.closest('.project');
+    const div = proj.nextElementSibling;
+    const prevDiv = proj.previousElementSibling;
+    if(dir === -1 && prevDiv && prevDiv.classList.contains('project-divider')){
+      proj.parentNode.insertBefore(proj, prevDiv);
+      proj.parentNode.insertBefore(prevDiv, proj);
+    } else if(dir === 1 && div && div.classList.contains('project-divider')){
+      const next = div.nextElementSibling;
+      if(next){
+        proj.parentNode.insertBefore(div, proj);
+        proj.parentNode.insertBefore(proj, next);
+      }
+    }
+    renumber();
+    saveState();
+  }
+
+  function addProject(){
+    const c = document.getElementById('projects-container');
+    const i = c.querySelectorAll('.project').length;
+    const div = document.createElement('div');
+    div.className = 'project-divider';
+    c.appendChild(div);
+
+    const p = document.createElement('div');
+    p.className = 'project';
+    p.dataset.idx = i;
+    p.innerHTML = `
+      <div class="proj-actions">
+        <button class="proj-move" onclick="moveProject(this, -1)" title="Move up">↑</button>
+        <button class="proj-move" onclick="moveProject(this, 1)" title="Move down">↓</button>
+        <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
+      </div>
+      <div class="project-header"><span class="project-name" contenteditable spellcheck="false">${i+1}. New Project</span><span class="project-role" contenteditable spellcheck="false">Role</span></div>
+      <div class="project-tech" contenteditable spellcheck="false">Tech stack</div>
+      <p class="project-desc" contenteditable spellcheck="false">Description of the project.</p>
+    `;
+    c.appendChild(p);
+    renumber();
+    saveState();
+  }
+
+  // ── Skill CRUD ──
+  function addSkillRow(){
+    const c = document.getElementById('skills-container');
+    const d = document.createElement('div');
+    d.className = 'skill-row';
+    d.contentEditable = 'true';
+    d.spellcheck = false;
+    d.innerHTML = '<strong>New:</strong> enter skills here<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button>';
+    c.appendChild(d);
+    saveState();
+  }
+
+  // ── Bullet CRUD ──
+  function addBullet(){
+    const ul = document.getElementById('exp-bullets');
+    const li = document.createElement('li');
+    li.contentEditable = 'true';
+    li.spellcheck = false;
+    li.innerHTML = 'New bullet point<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button>';
+    ul.appendChild(li);
+    saveState();
+  }
+
+  // ── Section CRUD ──
+  function deleteSection(id){
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    const div = sec.nextElementSibling;
+    if(div && div.classList.contains('divider')) div.remove();
+    const prev = sec.previousElementSibling;
+    if(prev && prev.classList.contains('divider')) prev.remove();
+    sec.remove();
+    saveState();
+  }
+
+  // ── Save Word file ──
+  function saveWord(){
+    const el = document.querySelector('.page');
+    const clone = el.cloneNode(true);
+    clone.querySelectorAll('.proj-actions,.sec-actions,.item-del,.add-project,.add-bullet,.add-skill').forEach(e => e.remove());
+    const content = clone.innerHTML.replace(/<div class="divider"><\/div>/g, '<hr class="divider">');
+    const doc = `\
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="UTF-8">
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
+<style>body{font-family:Inter,'Segoe UI',Arial,sans-serif;padding:46px 55px;color:#1e293b;font-size:11px;line-height:1.55}
+h1{font-size:28px;font-weight:900;margin:0 0 6px;color:#1e293b}
+.section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:0 0 8px;color:#1e293b}
+hr.divider{border:none;border-top:1.5px solid #cbd5e1;margin:12px 0}
+.project-header{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 2px}
+.project-name{font-size:12px;font-weight:600;color:#1e293b}
+.project-role{font-size:11px;color:#2563eb;font-weight:500}
+.project-tech{font-size:10px;color:#64748b;font-style:italic}
+.project-desc{font-size:11px;color:#334155;margin:2px 0;line-height:1.55}
+.project-link{font-size:10px;color:#2563eb;margin:0 0 4px}
+.summary{font-size:11px;color:#334155;line-height:1.55;margin:0}
+.title{font-size:13px;color:#2563eb;font-weight:500;margin:0 0 5px}
+.contact{font-size:10.5px;color:#64748b;margin:0 0 14px;line-height:1.55}
+.skill-row{font-size:11px;color:#334155;line-height:1.55;margin:2px 0}
+.exp-section li{font-size:11px;color:#334155;line-height:1.55;margin:2px 0}
+.edu-name{font-size:12px;font-weight:600;color:#1e293b;margin:0 0 4px}
+.edu-detail{font-size:11px;color:#334155;margin:0;line-height:1.55}
+.edu-detail .date{color:#64748b;margin-left:8px}
+.edu-detail .cgpa{color:#2563eb;font-weight:600;margin-left:14px}
+</style></head>
+<body>
+${content}
+</body></html>`;
+    const blob = new Blob([doc], {type: 'application/msword'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'Aditya Holkar Tech Resume.doc';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+</script>
+
+</body>
+</html>
