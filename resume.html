@@ -53,12 +53,15 @@
   .summary:hover{background:#f8fafc}
   .summary:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
 
-  .skill-row{font-size:var(--body-s);margin:0 0 4px;line-height:var(--line-h);color:#334155;outline:none;padding:2px 4px;border-radius:4px;position:relative;display:flex;align-items:center;gap:4px}
-  .skill-row:hover{background:#f8fafc}
-  .skill-row:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
-  .skill-row strong{font-weight:600;color:#1e293b}
-  .skill-row .item-del{display:none;width:16px;height:16px;border:none;border-radius:4px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:9px;align-items:center;justify-content:center;flex-shrink:0}
-  .skill-row:hover .item-del{display:flex}
+  .skill-cat{font-size:var(--body-s);margin:0 0 6px;padding:0;outline:none;border-radius:4px;position:relative}
+  .skill-cat:hover{background:#f8fafc}
+  .skill-cat-label{font-weight:600;color:#1e293b;display:block;margin-bottom:3px;font-size:var(--body-s);outline:none;padding:2px 4px;border-radius:4px}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:4px 6px;padding:0 4px}
+  .skill-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#1e293b;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:2px 8px;line-height:1.4;position:relative}
+  .skill-tag .item-del{display:none;width:14px;height:14px;border:none;border-radius:3px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:7px;align-items:center;justify-content:center;flex-shrink:0;margin-left:2px}
+  .skill-tag:hover .item-del{display:flex}
+  .skill-cat:hover .cat-del{display:flex}
+  .cat-del{display:none;position:absolute;top:2px;right:2px;width:16px;height:16px;border:none;border-radius:4px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:9px;align-items:center;justify-content:center;z-index:5}
 
   .exp-section{position:relative}
   .exp-header{font-size:13px;font-weight:600;color:#1e293b;margin:0;outline:none;padding:2px 4px;border-radius:4px}
@@ -113,7 +116,7 @@
   .project-tech{font-size:10px;color:#64748b;font-style:italic;margin:2px 0 0;outline:none;padding:1px 3px;border-radius:3px}
   .project-tech:hover{background:#f8fafc}
   .project-tech:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
-  .project-desc{font-size:var(--body-s);color:#334155;line-height:var(--line-h);text-align:justify;margin:3px 0 0;outline:none;padding:2px 4px;border-radius:4px}
+  .project-desc{font-size:var(--body-s);color:#334155;line-height:var(--line-h);margin:3px 0 0;outline:none;padding:2px 4px;border-radius:4px}
   .project-desc:hover{background:#f8fafc}
   .project-desc:focus{background:#eff6ff;box-shadow:0 0 0 2px #2563eb40}
   .project-link{font-size:10px;color:#2563eb;margin:2px 0 0;word-break:break-all;outline:none;padding:1px 3px;border-radius:3px}
@@ -129,7 +132,7 @@
   @media print{
     body{background:#fff;padding:0}
     .controls{display:none !important}
-    .sec-actions,.proj-actions,.item-del,.add-bullet,.add-project{display:none !important}
+    .sec-actions,.proj-actions,.item-del,.cat-del,.add-tag,.add-bullet,.add-project{display:none !important}
     .page{box-shadow:none;border-radius:0;margin:0;min-height:auto}
     .project,.section{break-inside:avoid;page-break-inside:avoid}
     [contenteditable]{outline:none !important;background:transparent !important}
@@ -154,9 +157,16 @@
   <div class="ctrl-row"><label>Body Font</label><input type="range" id="bodyS" min="9" max="14" value="11" step="0.5"><span class="val" id="bodySVal">11</span></div>
   <div class="ctrl-row"><label>Top Padding</label><input type="range" id="padT" min="30" max="70" value="46" step="1"><span class="val" id="padTVal">46</span></div>
   <div class="ctrl-row"><label>Bot Padding</label><input type="range" id="padB" min="30" max="70" value="46" step="1"><span class="val" id="padBVal">46</span></div>
+  <div style="margin:2px 0">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#1e293b;margin:0 0 4px">Resume Mode</div>
+    <div style="display:flex;gap:4px">
+      <button id="modeTech" onclick="toggleMode('tech')" style="flex:1;padding:6px 0;border-radius:8px;border:1.5px solid #2563eb;background:#2563eb;color:#fff;font-size:11px;font-weight:600;cursor:pointer">Tech</button>
+      <button id="modeNonTech" onclick="toggleMode('nontech')" style="flex:1;padding:6px 0;border-radius:8px;border:1.5px solid #94a3b8;background:transparent;color:#64748b;font-size:11px;font-weight:600;cursor:pointer">Non-Tech</button>
+    </div>
+  </div>
   <div class="ctrl-actions">
     <button class="btn-word" onclick="saveWord()">Save Word</button>
-    <button class="btn-reset" onclick="localStorage.removeItem('resumeHTML');location.reload()">Reset</button>
+    <button class="btn-reset" onclick="localStorage.removeItem('resumeHTML');localStorage.removeItem('resumeVer');localStorage.removeItem('resumeMode');location.reload()">Reset</button>
   </div>
 </div>
 
@@ -164,32 +174,95 @@
 
 <h1 id="el-name" contenteditable spellcheck="false">ADITYA HOLKAR</h1>
 <div class="title" id="el-title" contenteditable spellcheck="false">Frontend Developer · React · TypeScript · Design Systems · AI-Augmented Engineering</div>
-<div class="contact" id="el-contact" contenteditable spellcheck="false">adiholkar555@gmail.com | Pune, India | GitHub: github.com/Aditya-Holkar | LinkedIn: linkedin.com/in/aditya-holkar</div>
+<div class="contact" id="el-contact" contenteditable spellcheck="false">adiholkar555@gmail.com | +91 9049850240 | Pune, India | GitHub: github.com/Aditya-Holkar | LinkedIn: linkedin.com/in/aditya-holkar-life-is--unfair</div>
 
 <div class="divider"></div>
 
 <div class="section" id="sec-summary">
   <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-summary')" title="Delete section">✕</button></div>
   <div class="section-label" contenteditable spellcheck="false">Professional Summary</div>
-  <p class="summary" contenteditable spellcheck="false">Frontend developer with 2+ years of experience shipping production-grade React and TypeScript applications with component design systems. Architected a 50+ component UI library across 5+ client projects, cutting development time by 40%. Built full-stack data pipelines with REST APIs, Supabase, and Neon DB using Node.js. Developed 7+ AI-augmented applications using multi-provider LLM orchestration, RAG pipelines, and vector embeddings. Skilled in responsive design, accessibility, and performance optimization.</p>
+  <p class="summary" contenteditable spellcheck="false">Frontend developer with 2+ years of experience building React/TypeScript SPAs and design systems. Architected a 50+ component UI library used across 5+ client projects. Built 7+ AI-augmented apps with multi-provider LLM orchestration and RAG pipelines. Also experienced in legal case management and client coordination at a Workers' Compensation firm.</p>
 </div>
 
 <div class="divider"></div>
 
-<div class="section" id="sec-skills">
-  <div class="sec-actions">
-    <button class="sec-add" onclick="addSkillRow()" title="Add skill">+</button>
-    <button class="sec-del" onclick="deleteSection('sec-skills')" title="Delete section">✕</button>
+  <div class="section" id="sec-skills">
+    <div class="sec-actions">
+      <button class="sec-add" onclick="addSkillCat()" title="Add category">+</button>
+      <button class="sec-del" onclick="deleteSection('sec-skills')" title="Delete section">✕</button>
+    </div>
+    <div class="section-label" contenteditable spellcheck="false">Skills</div>
+    <div id="skills-container">
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Frontend</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">React 18/19<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">TypeScript<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">JavaScript ES6+<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Vite<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Tailwind CSS v4<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">GSAP<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Framer Motion<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Three.js<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Responsive Design<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Backend &amp; DB</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">REST APIs<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Node.js<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Supabase<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Neon DB<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">PostgreSQL<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">AI &amp; Data</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">Multi-Provider LLM Orchestration<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">RAG Pipelines<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Vector Embeddings<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Prompt Engineering<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Tools &amp; DevOps</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">Git<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Vite<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">ESLint<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">CI/CD<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Vercel<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Netlify<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Chrome DevTools<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Agile<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Office &amp; Legal</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">MS-Excel<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">MS-PowerPoint<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">MerusCase<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Slack<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">MS Teams<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Client Coordination<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Email Writing<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="section-label" contenteditable spellcheck="false">Technical Skills</div>
-  <div id="skills-container">
-    <div class="skill-row" contenteditable spellcheck="false"><strong>Frontend:</strong> React 18/19, TypeScript, JavaScript ES6+, Vite, Tailwind CSS v4, HTML5/CSS3, GSAP, Framer Motion, Three.js, Responsive Design<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
-    <div class="skill-row" contenteditable spellcheck="false"><strong>Testing &amp; Quality:</strong> Jest, React Testing Library, Web Accessibility (WCAG), Cross-Browser Testing, Lighthouse, ESLint<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
-    <div class="skill-row" contenteditable spellcheck="false"><strong>Backend &amp; DB:</strong> REST API Integration, Node.js, Supabase, Neon DB, PostgreSQL, Version Control (Git)<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
-    <div class="skill-row" contenteditable spellcheck="false"><strong>AI &amp; Data:</strong> Multi-Provider LLM Orchestration, RAG Pipelines, Vector Embeddings, Prompt Engineering, Data Visualization<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
-    <div class="skill-row" contenteditable spellcheck="false"><strong>Tools &amp; DevOps:</strong> Git, Vite, Webpack, ESLint, CI/CD, Vercel, Netlify, Render, Chrome DevTools, Agile Development<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
-  </div>
-</div>
 
 <div class="divider"></div>
 
@@ -198,16 +271,27 @@
   <div class="section-label" contenteditable spellcheck="false">Professional Experience</div>
   <div class="exp-section" id="exp-capslock">
     <div class="exp-header" contenteditable spellcheck="false">Capslock Studio Private Limited <span class="exp-location" contenteditable spellcheck="false">Pune, India</span></div>
-    <div class="exp-role" contenteditable spellcheck="false">Frontend Developer <span class="exp-period" contenteditable spellcheck="false">June 2023 — October 2025</span></div>
-    <ul class="exp-bullets" id="exp-bullets">
-      <li contenteditable spellcheck="false">Architected a 50+ component design system in React + Tailwind CSS from scratch, standardizing UI across 5+ client projects and reducing development time by ~40%.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
-      <li contenteditable spellcheck="false">Maintained end-to-end frontend for 5+ production websites, coordinating deployments, bug fixes, and feature additions across 2+ years with 99.9% uptime.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
-      <li contenteditable spellcheck="false">Integrated 15+ REST APIs with Supabase and Neon DB for real-time data sync and serverless PostgreSQL workflows across multiple applications.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
-      <li contenteditable spellcheck="false">Refactored legacy monolithic codebase into modular, scalable architecture, cutting technical debt by 60% and reducing onboarding time for new developers.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
-      <li contenteditable spellcheck="false">Collaborated with design and backend teams to ship accessible, pixel-perfect UI across browsers, achieving 90+ Lighthouse scores on all client properties.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
-      <li contenteditable spellcheck="false">Conducted code reviews, enforced ESLint standards, and followed Agile/Scrum methodology across 2-week sprint cycles.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+    <div class="exp-role" contenteditable spellcheck="false">Frontend Developer <span class="exp-period" contenteditable spellcheck="false">December 2022 — January 2025</span></div>
+    <ul class="exp-bullets" id="exp-bullets-1">
+      <li contenteditable spellcheck="false">Architected a 50+ component design system in React + Tailwind CSS, standardizing UI across 5+ client projects and cutting dev time by ~40%.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Maintained frontend for 5+ production websites — deployments, bug fixes, and feature rollouts with 99.9% uptime.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Integrated 15+ REST APIs with Supabase and Neon DB for real-time data sync and serverless PostgreSQL workflows.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Refactored legacy codebase into modular architecture, reducing technical debt by 60% and developer onboarding time.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Shipped accessible, cross-browser UI with 90+ Lighthouse scores, collaborating with design and backend teams.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
     </ul>
-    <button class="add-bullet" onclick="addBullet()">+ Add bullet</button>
+    <button class="add-bullet" onclick="addBullet('exp-bullets-1')">+ Add bullet</button>
+  </div>
+  <div style="height:8px"></div>
+  <div class="exp-section" id="exp-turnaround">
+    <div class="exp-header" contenteditable spellcheck="false">Turnaround International Private Limited <span class="exp-location" contenteditable spellcheck="false">Pune, India</span></div>
+    <div class="exp-role" contenteditable spellcheck="false">Process Associate — Paralegal <span class="exp-period" contenteditable spellcheck="false">February 2025 — November 2025</span></div>
+    <ul class="exp-bullets" id="exp-bullets-2">
+      <li contenteditable spellcheck="false">Assisted attorneys with med-legal case filings at the DWC board using MerusCase for case management and compliance tracking.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Managed 1,000+ active med-legal cases simultaneously, ensuring organized files and timely follow-ups.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Prepared daily status reports on case filings and resolutions for attorney review.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Coordinated with clients, insurance carriers, and legal teams to resolve case-related queries.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+    </ul>
+    <button class="add-bullet" onclick="addBullet('exp-bullets-2')">+ Add bullet</button>
   </div>
 </div>
 
@@ -216,8 +300,18 @@
 <div class="section" id="sec-education">
   <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-education')" title="Delete section">✕</button></div>
   <div class="section-label" contenteditable spellcheck="false">Education</div>
-  <div class="edu-name" contenteditable spellcheck="false">Annasaheb Magar College, Pune (Pune University)</div>
-  <div class="edu-detail" contenteditable spellcheck="false">BSc (Computer Science)<span class="date">July 2019 — July 2022</span><span class="cgpa">CGPA: 7.7</span></div>
+  <div class="edu-name" contenteditable spellcheck="false">Annasaheb Magar College, Pune — Savitribai Phule Pune University</div>
+  <div class="edu-detail" contenteditable spellcheck="false">Bachelor of Science (Computer Science)<span class="date">July 2019 — July 2022</span><span class="cgpa">CGPA: 7.7</span></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-languages">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-languages')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Languages</div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>English</strong> — Professional<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>Hindi</strong> — Native<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>Marathi</strong> — Native<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
 </div>
 
 <div class="divider"></div>
@@ -235,7 +329,7 @@
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">1. Capslock Design System</span><span class="project-role" contenteditable spellcheck="false">Design System Architect</span></div>
       <div class="project-tech" contenteditable spellcheck="false">React, TypeScript, Tailwind CSS, Component Architecture</div>
-      <p class="project-desc" contenteditable spellcheck="false">Architected 50+ reusable components in React with TypeScript and Tailwind CSS, eliminating duplicate UI code and standardizing responsive interfaces across all client products.</p>
+      <p class="project-desc" contenteditable spellcheck="false">50+ reusable React components with Tailwind CSS, eliminating duplicate UI code across all client products.</p>
     </div>
     <div class="project-divider"></div>
 
@@ -246,8 +340,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">2. Capslock Data Studio</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, REST APIs, Supabase, Neon DB, State Management</div>
-      <p class="project-desc" contenteditable spellcheck="false">Integrated 15+ REST APIs with real-time data fetching and serverless PostgreSQL via Supabase/Neon DB, handling auth, real-time subscriptions, and complex queries.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, REST APIs, Supabase, Neon DB</div>
+      <p class="project-desc" contenteditable spellcheck="false">15+ REST API integrations with real-time data sync and serverless PostgreSQL via Supabase/Neon DB.</p>
       <div class="project-link" contenteditable spellcheck="false">https://email-validation-kappa.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -259,8 +353,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">3. Capslock Studios — Maintenance</span><span class="project-role" contenteditable spellcheck="false">Production Engineer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Production Support, Performance Optimization</div>
-      <p class="project-desc" contenteditable spellcheck="false">Sole frontend engineer maintaining 5+ live client websites over 2+ years — owning deployments, critical bug fixes, feature rollouts, and performance optimization.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Production Support</div>
+      <p class="project-desc" contenteditable spellcheck="false">Sole FE engineer maintaining 5+ live client websites — deployments, bug fixes, and feature rollouts.</p>
     </div>
     <div class="project-divider"></div>
 
@@ -271,8 +365,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">4. BookChat</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, RAG Pipeline, Vector Search, Groq LLM</div>
-      <p class="project-desc" contenteditable spellcheck="false">Privacy-first PDF chat app with browser-based RAG using vector embeddings, cosine similarity search, and Groq LLM streaming. Multi-document Q&A with offline resilience.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, RAG, Vector Search, Groq LLM</div>
+      <p class="project-desc" contenteditable spellcheck="false">Privacy-first PDF chat app with browser-based RAG — vector embeddings, cosine similarity search, multi-document Q&A.</p>
       <div class="project-link" contenteditable spellcheck="false">https://book-chat-seven.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -284,8 +378,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">5. Niru Bhau — 3D Portfolio</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Three.js, Framer Motion, GSAP, Zustand</div>
-      <p class="project-desc" contenteditable spellcheck="false">Interactive 3D portfolio with Three.js MeshTransmissionMaterial gear model, particle system with mouse physics, dark/light theme, and smooth page transitions.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Three.js, Framer Motion, GSAP</div>
+      <p class="project-desc" contenteditable spellcheck="false">Interactive 3D portfolio with Three.js gear model, particle physics, dark/light theme, and smooth transitions.</p>
       <div class="project-link" contenteditable spellcheck="false">https://mech-wwim.onrender.com/</div>
     </div>
     <div class="project-divider"></div>
@@ -297,8 +391,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">6. Story Maker</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Multi-Provider LLM, Leaflet, i18n, Streaming</div>
-      <p class="project-desc" contenteditable spellcheck="false">AI story platform generating narratives from real-world locations via Leaflet map. Multi-provider LLM auto-fallback across 7 providers with streaming output in 75+ languages.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Multi-Provider LLM, Leaflet, i18n</div>
+      <p class="project-desc" contenteditable spellcheck="false">AI story platform from real-world locations via Leaflet map. Auto-fallback across 7 LLM providers, 75+ languages.</p>
       <div class="project-link" contenteditable spellcheck="false">https://story-studio-one.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -310,8 +404,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">7. AI Analyst Suite</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React 18, TypeScript, Multi-Provider AI, Recharts, TanStack</div>
-      <p class="project-desc" contenteditable spellcheck="false">Business analysis platform running parallel AI across 6 analyst personas using 7 LLM providers. Streaming KPI dashboards, TanStack tables, and HTML/Word/PDF export.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React 18, TypeScript, Multi-Provider AI, Recharts</div>
+      <p class="project-desc" contenteditable spellcheck="false">Business analysis with parallel AI across 6 personas using 7 LLM providers. Streaming KPI dashboards with HTML/Word/PDF export.</p>
       <div class="project-link" contenteditable spellcheck="false">https://idea-analyst.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -323,8 +417,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">8. LLM Evaluation Dashboard</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React 19, Radix UI, Recharts, Multi-Model, Cost Analytics</div>
-      <p class="project-desc" contenteditable spellcheck="false">Dashboard evaluating 7 LLMs across 14 metrics — latency, throughput, token usage, cost. Real-time streaming evaluations with comparison grids and dark/light theme.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React 19, Radix UI, Recharts, Cost Analytics</div>
+      <p class="project-desc" contenteditable spellcheck="false">Evaluates 7 LLMs across 14 metrics — latency, throughput, cost. Real-time streaming with comparison grids.</p>
       <div class="project-link" contenteditable spellcheck="false">https://llm-evalution-flax.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -336,8 +430,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">9. Taste Atlas</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Leaflet, MealDB API, Geolocation, LocalStorage</div>
-      <p class="project-desc" contenteditable spellcheck="false">Global cuisine discovery with interactive Leaflet map, MealDB API (78+ countries, 200+ recipes), favorites with localStorage, and geolocation-based discovery.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Leaflet, MealDB API, LocalStorage</div>
+      <p class="project-desc" contenteditable spellcheck="false">Global cuisine discovery via interactive Leaflet map. MealDB API (78+ countries, 200+ recipes), favorites with localStorage.</p>
       <div class="project-link" contenteditable spellcheck="false">https://taste-atlas.onrender.com/</div>
     </div>
     <div class="project-divider"></div>
@@ -349,8 +443,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">10. TradeIntel</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Vite, Tailwind CSS, Theme System, Responsive Design</div>
-      <p class="project-desc" contenteditable spellcheck="false">Import/export intelligence platform with dark/light theme, responsive data-dashboard layout, and component-driven architecture for data exploration workflows.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Vite, Tailwind CSS, Dark/Light Theme</div>
+      <p class="project-desc" contenteditable spellcheck="false">Import/export intelligence platform with dark/light theme, responsive data dashboard, and component-driven architecture.</p>
       <div class="project-link" contenteditable spellcheck="false">https://trade-intell.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -362,8 +456,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">11. UniSearch</span><span class="project-role" contenteditable spellcheck="false">Frontend Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, Vite, API Integration, LocalStorage, CSV Export</div>
-      <p class="project-desc" contenteditable spellcheck="false">University discovery platform ingesting 15,000+ institutions via Hipolabs API. Country-based search with table/card views, favorites, and CSV export.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, Vite, Hipolabs API, CSV Export</div>
+      <p class="project-desc" contenteditable spellcheck="false">University discovery platform with 15,000+ institutions via Hipolabs API. Search, favorites, and CSV export.</p>
       <div class="project-link" contenteditable spellcheck="false">https://uni-search-tau.vercel.app/</div>
     </div>
     <div class="project-divider"></div>
@@ -375,8 +469,8 @@
         <button class="proj-del" onclick="deleteProject(this)" title="Delete">✕</button>
       </div>
       <div class="project-header"><span class="project-name" contenteditable spellcheck="false">12. VibeNews</span><span class="project-role" contenteditable spellcheck="false">Full Stack Developer</span></div>
-      <div class="project-tech" contenteditable spellcheck="false">React, News API, Client-Side Routing, Theme System</div>
-      <p class="project-desc" contenteditable spellcheck="false">Curated news aggregator with real-time multi-category news fetching, client-side routing, dark/light theme toggle, and responsive layout via Vite.</p>
+      <div class="project-tech" contenteditable spellcheck="false">React, News API, Client-Side Routing</div>
+      <p class="project-desc" contenteditable spellcheck="true">Curated news aggregator with multi-category fetching, client-side routing, dark/light theme, and responsive layout.</p>
       <div class="project-link" contenteditable spellcheck="false">https://newsflow-l0r1.onrender.com/</div>
     </div>
 
@@ -408,9 +502,19 @@
   }
   document.addEventListener('input', saveState);
 
-  // ── Restore ──
+  // ── Capture original tech HTML BEFORE any restore ──
+  const TECH_HTML = document.getElementById('resumePage').innerHTML;
+
+  // ── Restore (only if version matches, else seed fresh) ──
+  const SAVED_VER = 'resume_v3';
   const saved = localStorage.getItem('resumeHTML');
-  if(saved) document.getElementById('resumePage').innerHTML = saved;
+  const ver = localStorage.getItem('resumeVer');
+  if(saved && ver === SAVED_VER) {
+    document.getElementById('resumePage').innerHTML = saved;
+  } else {
+    localStorage.removeItem('resumeHTML');
+    localStorage.setItem('resumeVer', SAVED_VER);
+  }
 
   // ── Project CRUD ──
   function renumber(){
@@ -475,20 +579,30 @@
   }
 
   // ── Skill CRUD ──
-  function addSkillRow(){
+  function addSkillCat(){
     const c = document.getElementById('skills-container');
-    const d = document.createElement('div');
-    d.className = 'skill-row';
-    d.contentEditable = 'true';
-    d.spellcheck = false;
-    d.innerHTML = '<strong>New:</strong> enter skills here<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button>';
-    c.appendChild(d);
+    const cat = document.createElement('div');
+    cat.className = 'skill-cat';
+    cat.innerHTML = '<button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button><span class="skill-cat-label" contenteditable spellcheck="false">New Category</span><div class="skill-tags"><span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span></div>';
+    c.appendChild(cat);
+    saveState();
+  }
+
+  function addTag(el){
+    const tags = el.parentElement;
+    const tag = document.createElement('span');
+    tag.className = 'skill-tag';
+    tag.contentEditable = 'true';
+    tag.spellcheck = false;
+    tag.innerHTML = 'New Skill<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button>';
+    tags.insertBefore(tag, el);
+    tag.focus();
     saveState();
   }
 
   // ── Bullet CRUD ──
-  function addBullet(){
-    const ul = document.getElementById('exp-bullets');
+  function addBullet(id){
+    const ul = document.getElementById(id || 'exp-bullets-1');
     const li = document.createElement('li');
     li.contentEditable = 'true';
     li.spellcheck = false;
@@ -509,11 +623,168 @@
     saveState();
   }
 
+  // ── Resume Mode Toggle ──
+  const NON_TECH_HTML = `
+<h1 id="el-name" contenteditable spellcheck="false">ADITYA HOLKAR</h1>
+<div class="title" id="el-title" contenteditable spellcheck="false">Process Associate | Paralegal | Case Management | Client Coordination</div>
+<div class="contact" id="el-contact" contenteditable spellcheck="false">adiholkar555@gmail.com | +91 9049850240 | Pune, India | LinkedIn: linkedin.com/in/aditya-holkar-life-is--unfair</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-summary">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-summary')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Professional Summary</div>
+  <p class="summary" contenteditable spellcheck="false">Process Associate with 10 months of experience in legal case management, client coordination, and document processing at a Workers' Compensation firm. Previously worked as a Frontend Developer for 2+ years, bringing strong communication, organizational, and technical skills to professional services environments.</p>
+</div>
+
+<div class="divider"></div>
+
+  <div class="section" id="sec-skills">
+    <div class="sec-actions">
+      <button class="sec-add" onclick="addSkillCat()" title="Add category">+</button>
+      <button class="sec-del" onclick="deleteSection('sec-skills')" title="Delete section">✕</button>
+    </div>
+    <div class="section-label" contenteditable spellcheck="false">Skills</div>
+    <div id="skills-container">
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Office &amp; Data</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">MS-Excel<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">MS-PowerPoint<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Data Entry<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Pivot Tables<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Data Validation<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Legal &amp; Collaboration</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">MerusCase<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Slack<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Microsoft Teams<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Case Management<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Compliance Tracking<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <button class="cat-del" onclick="this.parentElement.remove();saveState()">✕</button>
+        <span class="skill-cat-label" contenteditable spellcheck="false">Professional</span>
+        <div class="skill-tags">
+          <span class="skill-tag" contenteditable spellcheck="false">Client Coordination<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Email Writing<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Active Listening<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Verbal &amp; Written Communication<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag" contenteditable spellcheck="false">Report Preparation<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></span>
+          <span class="skill-tag add-tag" onclick="addTag(this)" style="cursor:pointer;color:#2563eb;border:1px dashed #93c5fd;background:transparent">+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-experience">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-experience')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Professional Experience</div>
+  <div class="exp-section" id="exp-turnaround">
+    <div class="exp-header" contenteditable spellcheck="false">Turnaround International Private Limited <span class="exp-location" contenteditable spellcheck="false">Pune, India</span></div>
+    <div class="exp-role" contenteditable spellcheck="false">Process Associate — Paralegal <span class="exp-period" contenteditable spellcheck="false">February 2025 — November 2025</span></div>
+    <ul class="exp-bullets" id="exp-bullets-2">
+      <li contenteditable spellcheck="false">Assisted attorneys with med-legal case filings at the DWC board using MerusCase for case management and compliance tracking.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Managed 1,000+ active med-legal cases simultaneously, ensuring organized files and timely follow-ups.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Prepared daily status reports on case filings and resolutions for attorney review.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Coordinated with clients, insurance carriers, and legal teams to resolve case-related queries.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+    </ul>
+    <button class="add-bullet" onclick="addBullet('exp-bullets-2')">+ Add bullet</button>
+  </div>
+  <div style="height:8px"></div>
+  <div class="exp-section" id="exp-capslock">
+    <div class="exp-header" contenteditable spellcheck="false">Capslock Studio Private Limited <span class="exp-location" contenteditable spellcheck="false">Pune, India</span></div>
+    <div class="exp-role" contenteditable spellcheck="false">Frontend Developer <span class="exp-period" contenteditable spellcheck="false">December 2022 — January 2025</span></div>
+    <ul class="exp-bullets" id="exp-bullets-1">
+      <li contenteditable spellcheck="false">Architected a 50+ component design system in React + Tailwind CSS, standardizing UI across 5+ client projects and cutting dev time by ~40%.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Maintained frontend for 5+ production websites — deployments, bug fixes, and feature rollouts with 99.9% uptime.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Integrated 15+ REST APIs with Supabase and Neon DB for real-time data sync and serverless PostgreSQL workflows.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Refactored legacy codebase into modular architecture, reducing technical debt by 60% and developer onboarding time.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+      <li contenteditable spellcheck="false">Shipped accessible, cross-browser UI with 90+ Lighthouse scores, collaborating with design and backend teams.<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></li>
+    </ul>
+    <button class="add-bullet" onclick="addBullet('exp-bullets-1')">+ Add bullet</button>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-education">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-education')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Education</div>
+  <div class="edu-name" contenteditable spellcheck="false">Annasaheb Magar College, Pune — Savitribai Phule Pune University</div>
+  <div class="edu-detail" contenteditable spellcheck="false">Bachelor of Science (Computer Science)<span class="date">July 2019 — July 2022</span><span class="cgpa">CGPA: 7.7</span></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="sec-languages">
+  <div class="sec-actions"><button class="sec-del" onclick="deleteSection('sec-languages')" title="Delete section">✕</button></div>
+  <div class="section-label" contenteditable spellcheck="false">Languages</div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>English</strong> — Professional<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>Hindi</strong> — Native<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+  <div class="skill-row" contenteditable spellcheck="false"><strong>Marathi</strong> — Native<button class="item-del" onclick="this.parentElement.remove();saveState()">✕</button></div>
+</div>
+`;
+
+  function toggleMode(mode) {
+    const page = document.getElementById('resumePage');
+    const currentContent = page.innerHTML;
+    const techBtn = document.getElementById('modeTech');
+    const nonTechBtn = document.getElementById('modeNonTech');
+
+    if (mode === 'nontech') {
+      localStorage.setItem('resumeMode', 'nontech');
+      page.innerHTML = NON_TECH_HTML;
+      techBtn.style.background = 'transparent';
+      techBtn.style.color = '#64748b';
+      techBtn.style.borderColor = '#94a3b8';
+      nonTechBtn.style.background = '#2563eb';
+      nonTechBtn.style.color = '#fff';
+      nonTechBtn.style.borderColor = '#2563eb';
+    } else {
+      localStorage.setItem('resumeMode', 'tech');
+      page.innerHTML = TECH_HTML;
+      techBtn.style.background = '#2563eb';
+      techBtn.style.color = '#fff';
+      techBtn.style.borderColor = '#2563eb';
+      nonTechBtn.style.background = 'transparent';
+      nonTechBtn.style.color = '#64748b';
+      nonTechBtn.style.borderColor = '#94a3b8';
+    }
+    apply();
+    saveState();
+  }
+
+  // Restore mode selection on load
+  const savedMode = localStorage.getItem('resumeMode');
+  if (savedMode === 'nontech') {
+    toggleMode('nontech');
+  } else {
+    // Mark tech button as active
+    document.getElementById('modeTech').style.background = '#2563eb';
+    document.getElementById('modeTech').style.color = '#fff';
+    document.getElementById('modeTech').style.borderColor = '#2563eb';
+    document.getElementById('modeNonTech').style.background = 'transparent';
+    document.getElementById('modeNonTech').style.color = '#64748b';
+    document.getElementById('modeNonTech').style.borderColor = '#94a3b8';
+  }
+
   // ── Save Word file ──
   function saveWord(){
     const el = document.querySelector('.page');
     const clone = el.cloneNode(true);
-    clone.querySelectorAll('.proj-actions,.sec-actions,.item-del,.add-project,.add-bullet,.add-skill').forEach(e => e.remove());
+    clone.querySelectorAll('.proj-actions,.sec-actions,.item-del,.cat-del,.add-tag,.add-project,.add-bullet,.add-skill').forEach(e => e.remove());
     const content = clone.innerHTML.replace(/<div class="divider"><\/div>/g, '<hr class="divider">');
     const doc = `\
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
@@ -532,7 +803,10 @@ hr.divider{border:none;border-top:1.5px solid #cbd5e1;margin:12px 0}
 .summary{font-size:11px;color:#334155;line-height:1.55;margin:0}
 .title{font-size:13px;color:#2563eb;font-weight:500;margin:0 0 5px}
 .contact{font-size:10.5px;color:#64748b;margin:0 0 14px;line-height:1.55}
-.skill-row{font-size:11px;color:#334155;line-height:1.55;margin:2px 0}
+.skill-cat{margin:0 0 8px}
+.skill-cat-label{font-weight:600;color:#1e293b;font-size:11px;display:block;margin-bottom:3px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:4px 6px}
+.skill-tag{font-size:10px;color:#1e293b;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:2px 8px;display:inline-block}
 .exp-section li{font-size:11px;color:#334155;line-height:1.55;margin:2px 0}
 .edu-name{font-size:12px;font-weight:600;color:#1e293b;margin:0 0 4px}
 .edu-detail{font-size:11px;color:#334155;margin:0;line-height:1.55}
@@ -542,10 +816,12 @@ hr.divider{border:none;border-top:1.5px solid #cbd5e1;margin:12px 0}
 <body>
 ${content}
 </body></html>`;
+    const mode = localStorage.getItem('resumeMode') || 'tech';
+    const name = mode === 'nontech' ? 'Aditya Holkar Resume - Non Tech.doc' : 'Aditya Holkar Resume - Tech.doc';
     const blob = new Blob([doc], {type: 'application/msword'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'Aditya Holkar Tech Resume.doc';
+    a.download = name;
     a.click();
     URL.revokeObjectURL(a.href);
   }
