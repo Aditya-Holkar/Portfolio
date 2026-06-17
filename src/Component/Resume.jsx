@@ -42,7 +42,7 @@ const socials = [
 async function downloadPdf() {
   const name = 'Aditya Holkar.pdf'
   try {
-    const res = await fetch('/Aditya Holkar Tech Resume.pdf')
+    const res = await fetch('/Aditya Holkar.pdf')
     if (!res.ok) throw new Error('not found')
     const blob = await res.blob()
     const url = URL.createObjectURL(blob)
