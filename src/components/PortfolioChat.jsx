@@ -200,7 +200,7 @@ export default function PortfolioChat() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className='fixed bottom-6 right-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-105 active:scale-95'
+        className='fixed bottom-6 right-6 z-[10000] flex h-14 w-14 cursor-pointer items-center justify-center rounded-full text-white shadow-lg transition-transform hover:scale-105 active:scale-95'
         style={{
           backgroundColor: 'var(--accent)',
           boxShadow: '0 0 24px rgba(124, 77, 255, 0.5)',
@@ -210,7 +210,7 @@ export default function PortfolioChat() {
       </button>
 
       <div
-        className='fixed inset-0 z-[60] transition-opacity duration-300'
+        className='fixed inset-0 z-[10001] transition-opacity duration-300'
         style={{
           backgroundColor: 'rgba(0,0,0,0.5)',
           opacity: open ? 1 : 0,
@@ -221,7 +221,7 @@ export default function PortfolioChat() {
       />
 
       <div
-        className='fixed right-0 top-0 z-[70] flex h-full w-full flex-col transition-transform duration-300 sm:w-[400px]'
+        className='fixed right-0 top-0 z-[10002] flex h-full w-full flex-col transition-transform duration-300 sm:w-[400px]'
         style={{
           backgroundColor: 'rgba(13,13,13,0.92)',
           backdropFilter: 'blur(24px)',
