@@ -30,3 +30,5 @@ linkedin-guide.md
 *.njsproj
 *.sln
 *.sw?
+
+.env

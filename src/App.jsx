@@ -12,6 +12,7 @@ import { Splash } from './Component/Splash'
 import { RouteLoader } from './Component/RouteLoader'
 import { Footer } from './Component/Footer'
 import { useThemeStore } from './Zu-Store/Store'
+import PortfolioChat from './components/PortfolioChat'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -63,6 +64,7 @@ function App () {
         }}
       >
         <Navbar />
+        <PortfolioChat />
         <div className='z-10 h-fit p-[128px_20px_20px_240px] max-md:px-4 max-md:pt-20'>
           <Routes>
             <Route path='/' element={<Home />} />
