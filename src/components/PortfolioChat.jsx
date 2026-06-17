@@ -47,9 +47,30 @@ const BotAvatar = memo(() => (
 function parseBold(text) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((p, j) =>
     p.startsWith('**') && p.endsWith('**')
-      ? <strong key={j}>{p.slice(2, -2)}</strong>
+      ? <strong key={`b-${j}`}>{p.slice(2, -2)}</strong>
       : p
   )
+}
+
+function parseInline(segment) {
+  const parts = segment.split(/(\[[^\]]+\]\([^)]+\))/g)
+  return parts.flatMap((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+    if (m) {
+      return (
+        <a
+          key={`l-${i}`}
+          href={m[2]}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={{ color: 'var(--accent)', textDecoration: 'underline' }}
+        >
+          {m[1]}
+        </a>
+      )
+    }
+    return parseBold(part)
+  })
 }
 
 function renderContent(text) {
@@ -71,10 +92,10 @@ function renderContent(text) {
     const isListItem = /^[-*]\s/.test(trimmed)
     if (isListItem) {
       const text = trimmed.replace(/^[-*]\s/, '')
-      listItems.push(<li key={i} className='ml-4 list-disc'>{parseBold(text)}</li>)
+      listItems.push(<li key={i} className='ml-4 list-disc'>{parseInline(text)}</li>)
     } else {
       flushList()
-      blocks.push(<p key={`p-${i}`} className={blocks.length ? 'mt-2.5' : ''}>{parseBold(trimmed)}</p>)
+      blocks.push(<p key={`p-${i}`} className={blocks.length ? 'mt-2.5' : ''}>{parseInline(trimmed)}</p>)
     }
   }
   flushList()
